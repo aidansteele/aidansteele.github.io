@@ -18,7 +18,7 @@ reasonably well-known: `AKIA` is for long-lived access keys (i.e. those that are
 assigned to IAM users) and `ASIA` is for temporary access keys (i.e. those returned
 by `sts:AssumeRole` and so on.)
 
-![screenshot](/assets/2020-09-26-unique-id-prefixes.png)
+![screenshot](/assets/2020-09-26-iam-unique-id-prefixes.png)
 
 Beyond that, I'm not aware of any documentation on the format. A couple of years 
 ago, Scott Piper of Summit Route did some research and wrote down his [findings][scott].
