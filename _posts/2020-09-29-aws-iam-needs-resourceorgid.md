@@ -160,6 +160,32 @@ of cross-org encryption/decryption. In the unlikely scenario that is part of
 your workflow, it can always be narrowed down to not deny usage of cross-org
 keys by suitably tagged IAM principals.
 
+## What does AWS have to say about all this?
+
+The [`kms:Decrypt`][docs] do actually have a bit to say on this, but it's not
+spelled out as clearly as might be necessary for someone without sufficient
+pre-existing background. The relevant excerpts:
+
+> [s]pecifying the CMK is always recommended as a best practice. When you use 
+> the KeyId parameter to specify a CMK, AWS KMS only uses the CMK you specify. 
+> If the ciphertext was encrypted under a different CMK, the Decrypt operation 
+> fails. This practice ensures that you use the CMK that you intend.
+>
+> Whenever possible, use key policies to give users permission to call the Decrypt 
+> operation on a particular CMK, instead of using IAM policies. Otherwise, you
+> might create an IAM user policy that gives the user Decrypt permission on all 
+> CMKs. This user could decrypt ciphertext that was encrypted by CMKs in other 
+> accounts if the key policy for the cross-account CMK permits it. If you 
+> must use an IAM policy for Decrypt permissions, limit the user to particular 
+> CMKs or particular trusted accounts. 
+>
+> [...]
+> 
+> `KeyId`
+> [...] If you used a symmetric CMK, AWS KMS can get the CMK from metadata that 
+> it adds to the symmetric ciphertext blob. However, it is always recommended 
+> as a best practice. This practice ensures that you use the CMK that you intend.
+
 ## You're wrong
 
 I probably am wrong. Or maybe I've misestimated the likelihood of something. Or
@@ -168,3 +194,4 @@ new condition key. Please reach out to me on Twitter and share your thoughts.
 
 [aws-blog]: https://aws.amazon.com/blogs/security/control-access-to-aws-resources-by-using-the-aws-organization-of-iam-principals/
 [square-blog]: https://developer.squareup.com/blog/adopting-aws-vpc-endpoints-at-square/
+[docs]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html
