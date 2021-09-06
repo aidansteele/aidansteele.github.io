@@ -5,7 +5,7 @@ date: 2021-09-06 18:37:52 +1100
 categories: blog
 ---
 
-A while ago [I asked on Twitter] if anyone knew how to knew how to set
+A while ago [I asked on Twitter][tweet] if anyone knew how to knew how to set
 message attributes when using AWS API Gateway (HTTP API flavour)'s integration
 for `SQS-SendMessage`. I didn't get very far.
 
