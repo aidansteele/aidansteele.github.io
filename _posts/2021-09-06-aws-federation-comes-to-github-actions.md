@@ -209,7 +209,12 @@ Condition:
 ### Can I use those JWT claims as role session tags?
 
 Not directly, unfortunately. AWS requires role session tags to follow a fairly 
-specific format - one that I doubt GitHub Actions will implement. But you could
-have a token vending machine… stay tuned. 
+specific format - one that I doubt GitHub Actions will implement. ~~But you could
+have a token vending machine… stay tuned.~~
+
+**EDIT**: I built an (still cooling down after coming out of the oven) example
+of how you could use all those JWT claims as role session tags. Take a look
+at [glassechidna/ghaoidc][ghaoidc] and let me know your thoughts.
 
 [eks]: https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
+[ghaoidc]: https://github.com/glassechidna/ghaoidc
