@@ -103,7 +103,7 @@ Principal:
   Federated: !Ref GithubOidc
 Condition:
   StringLike:
-    vstoken.actions.githubusercontent.com:sub: repo:your-github-org:*
+    vstoken.actions.githubusercontent.com:sub: repo:your-github-org/*
 ```
 
 Maybe you want an IAM role scoped only to workflows on the `main` branches, because
