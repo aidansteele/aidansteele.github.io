@@ -43,7 +43,7 @@ Resources:
     Type: AWS::IAM::OIDCProvider
     Properties:
       Url: https://vstoken.actions.githubusercontent.com
-      ClientIdList: [sigstore]
+      ClientIdList: [https://github.com/aidansteele/aws-federation-github-actions]
       ThumbprintList: [a031c46782e6e6c662c2c87c76da9aa62ccabd8e]
 
 Outputs:
@@ -82,7 +82,7 @@ jobs:
           echo AWS_ROLE_ARN=$AWS_ROLE_ARN >> $GITHUB_ENV
           echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> $GITHUB_ENV
 
-          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sigstore" | jq -r '.value' > $AWS_WEB_IDENTITY_TOKEN_FILE
+          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r '.value' > $AWS_WEB_IDENTITY_TOKEN_FILE
 
       - run: aws sts get-caller-identity # just an example. why not deploy something?
 ```
@@ -126,7 +126,7 @@ Condition:
 ```json
 {
   "actor": "aidansteele",
-  "aud": "sigstore",
+  "aud": "https://github.com/aidansteele/aws-federation-github-actions",
   "base_ref": "",
   "event_name": "push",
   "exp": 1631672856,
@@ -181,7 +181,7 @@ Condition:
       "arn": "arn:aws:sts::0123456789012:assumed-role/ExampleGithubRole/botocore-session-1631674835",
       "assumedRoleId": "AROAY99999AOBPS6VNUFM:botocore-session-1631674835"
     },
-    "audience": "sigstore",
+    "audience": "https://github.com/aidansteele/aws-federation-github-actions",
     "credentials": {
       "accessKeyId": "ASIAY29999OMG3MKNAG",
       "expiration": "Sep 15, 2021 4:00:36 AM",
@@ -199,7 +199,7 @@ Condition:
   "userAgent": "aws-cli/2.2.35 Python/3.8.8 Linux/5.8.0-1040-azure exe/x86_64.ubuntu.20 prompt/off command/sts.get-caller-identity",
   "userIdentity": {
     "identityProvider": "arn:aws:iam::0123456789012:oidc-provider/vstoken.actions.githubusercontent.com",
-    "principalId": "arn:aws:iam::0123456789012:oidc-provider/vstoken.actions.githubusercontent.com:sigstore:repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main",
+    "principalId": "arn:aws:iam::0123456789012:oidc-provider/vstoken.actions.githubusercontent.com:https://github.com/aidansteele/aws-federation-github-actions:repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main",
     "type": "WebIdentityUser",
     "userName": "repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main"
   }
