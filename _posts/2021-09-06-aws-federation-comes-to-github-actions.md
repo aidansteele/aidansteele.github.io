@@ -8,6 +8,8 @@ categories: blog
 **At the time of writing, this functionality exists but has yet to be announced
 or documented. It works, though!**
 
+**EDIT**: Here is the functionality on the [GitHub roadmap][roadmap].
+
 GitHub Actions has new functionality that can vend OpenID Connect credentials
 to jobs running on the platform. This is very exciting for AWS account
 administrators as it means that CI/CD jobs no longer need **any** long-term
@@ -217,5 +219,6 @@ have a token vending machine… stay tuned.~~
 of how you could use all those JWT claims as role session tags. Take a look
 at [glassechidna/ghaoidc][ghaoidc] and let me know your thoughts.
 
+[roadmap]: https://github.com/github/roadmap/issues/249
 [eks]: https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/
 [ghaoidc]: https://github.com/glassechidna/ghaoidc
