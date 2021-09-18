@@ -43,8 +43,9 @@ Resources:
     Type: AWS::IAM::OIDCProvider
     Properties:
       Url: https://vstoken.actions.githubusercontent.com
-      ClientIdList: [https://github.com/aidansteele/aws-federation-github-actions]
       ThumbprintList: [a031c46782e6e6c662c2c87c76da9aa62ccabd8e]
+      ClientIdList: 
+        - !Sub https://github.com/${RepoName}
 
 Outputs:
   Role:
