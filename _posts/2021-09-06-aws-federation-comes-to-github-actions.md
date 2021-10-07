@@ -39,12 +39,12 @@ Resources:
               Federated: !Ref GithubOidc
             Condition:
               StringLike:
-                vstoken.actions.githubusercontent.com:sub: !Sub repo:${RepoName}:*
+                token.actions.githubusercontent.com:sub: !Sub repo:${RepoName}:*
 
   GithubOidc:
     Type: AWS::IAM::OIDCProvider
     Properties:
-      Url: https://vstoken.actions.githubusercontent.com
+      Url: https://token.actions.githubusercontent.com
       ThumbprintList: [a031c46782e6e6c662c2c87c76da9aa62ccabd8e]
       ClientIdList: 
         - !Sub https://github.com/${RepoName}
@@ -106,7 +106,7 @@ Principal:
   Federated: !Ref GithubOidc
 Condition:
   StringLike:
-    vstoken.actions.githubusercontent.com:sub: repo:your-github-org/*
+    token.actions.githubusercontent.com:sub: repo:your-github-org/*
 ```
 
 Maybe you want an IAM role scoped only to workflows on the `main` branches, because
@@ -119,7 +119,7 @@ Principal:
   Federated: !Ref GithubOidc
 Condition:
   StringLike:
-    vstoken.actions.githubusercontent.com:sub: repo:your-github-org/*:ref:refs/heads/main
+    token.actions.githubusercontent.com:sub: repo:your-github-org/*:ref:refs/heads/main
 ```
 
 ## FAQ
@@ -135,7 +135,7 @@ Condition:
   "exp": 1631672856,
   "head_ref": "",
   "iat": 1631672556,
-  "iss": "https://vstoken.actions.githubusercontent.com",
+  "iss": "https://token.actions.githubusercontent.com",
   "job_workflow_ref": "aidansteele/aws-federation-github-actions/.github/workflows/test.yml@refs/heads/main",
   "jti": "8ea8373e-0f9d-489d-a480-ac37deexample",
   "nbf": 1631671956,
@@ -190,7 +190,7 @@ Condition:
       "expiration": "Sep 15, 2021 4:00:36 AM",
       "sessionToken": "IQ[trimmed]lg=="
     },
-    "provider": "arn:aws:iam::0123456789012:oidc-provider/vstoken.actions.githubusercontent.com",
+    "provider": "arn:aws:iam::0123456789012:oidc-provider/token.actions.githubusercontent.com",
     "subjectFromWebIdentityToken": "repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main"
   },
   "sourceIPAddress": "104.211.45.236",
@@ -201,8 +201,8 @@ Condition:
   },
   "userAgent": "aws-cli/2.2.35 Python/3.8.8 Linux/5.8.0-1040-azure exe/x86_64.ubuntu.20 prompt/off command/sts.get-caller-identity",
   "userIdentity": {
-    "identityProvider": "arn:aws:iam::0123456789012:oidc-provider/vstoken.actions.githubusercontent.com",
-    "principalId": "arn:aws:iam::0123456789012:oidc-provider/vstoken.actions.githubusercontent.com:https://github.com/aidansteele/aws-federation-github-actions:repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main",
+    "identityProvider": "arn:aws:iam::0123456789012:oidc-provider/token.actions.githubusercontent.com",
+    "principalId": "arn:aws:iam::0123456789012:oidc-provider/token.actions.githubusercontent.com:https://github.com/aidansteele/aws-federation-github-actions:repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main",
     "type": "WebIdentityUser",
     "userName": "repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main"
   }
