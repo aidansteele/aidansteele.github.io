@@ -21,7 +21,10 @@ account.
 
 ```yaml
 Parameters:
-  RepoName:
+  GithubOrg: # can also be a regular user
+    Type: String
+    Default: aidansteele
+  FullRepoName:
     Type: String
     Default: aidansteele/aws-federation-github-actions
 
@@ -39,7 +42,7 @@ Resources:
               Federated: !Ref GithubOidc
             Condition:
               StringLike:
-                token.actions.githubusercontent.com:sub: !Sub repo:${RepoName}:*
+                token.actions.githubusercontent.com:sub: !Sub repo:${FullRepoName}:*
 
   GithubOidc:
     Type: AWS::IAM::OIDCProvider
@@ -47,7 +50,7 @@ Resources:
       Url: https://token.actions.githubusercontent.com
       ThumbprintList: [a031c46782e6e6c662c2c87c76da9aa62ccabd8e]
       ClientIdList: 
-        - !Sub https://github.com/${RepoName}
+        - !Sub https://github.com/${GithubOrg}
 
 Outputs:
   Role:
@@ -129,7 +132,7 @@ Condition:
 ```json
 {
   "actor": "aidansteele",
-  "aud": "https://github.com/aidansteele/aws-federation-github-actions",
+  "aud": "https://github.com/aidansteele",
   "base_ref": "",
   "event_name": "push",
   "exp": 1631672856,
@@ -184,7 +187,7 @@ Condition:
       "arn": "arn:aws:sts::0123456789012:assumed-role/ExampleGithubRole/botocore-session-1631674835",
       "assumedRoleId": "AROAY99999AOBPS6VNUFM:botocore-session-1631674835"
     },
-    "audience": "https://github.com/aidansteele/aws-federation-github-actions",
+    "audience": "https://github.com/aidansteele",
     "credentials": {
       "accessKeyId": "ASIAY29999OMG3MKNAG",
       "expiration": "Sep 15, 2021 4:00:36 AM",
@@ -202,7 +205,7 @@ Condition:
   "userAgent": "aws-cli/2.2.35 Python/3.8.8 Linux/5.8.0-1040-azure exe/x86_64.ubuntu.20 prompt/off command/sts.get-caller-identity",
   "userIdentity": {
     "identityProvider": "arn:aws:iam::0123456789012:oidc-provider/token.actions.githubusercontent.com",
-    "principalId": "arn:aws:iam::0123456789012:oidc-provider/token.actions.githubusercontent.com:https://github.com/aidansteele/aws-federation-github-actions:repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main",
+    "principalId": "arn:aws:iam::0123456789012:oidc-provider/token.actions.githubusercontent.com:https://github.com/aidansteele:repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main",
     "type": "WebIdentityUser",
     "userName": "repo:aidansteele/aws-federation-github-actions:ref:refs/heads/main"
   }
