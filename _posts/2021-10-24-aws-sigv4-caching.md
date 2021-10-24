@@ -7,7 +7,7 @@ categories: blog
 
 Say you find yourself doing silly things with AWS APIs on a lazy Sunday
 afternoon. And you are getting the following inexplicable error when using
-perfectly valid crendentials:
+perfectly valid credentials:
 
 ```xml
 <Error>
