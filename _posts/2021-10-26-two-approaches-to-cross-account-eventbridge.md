@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Two approahces to cross-account EventBridge
+title: Two approaches to cross-account EventBridge
 date: 2021-10-29 11:37:52 +1100
 categories: blog
 ---
