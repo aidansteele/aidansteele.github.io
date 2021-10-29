@@ -56,7 +56,7 @@ Resources:
                 Resource: !Sub arn:aws:events:${AWS::Region}:${Account-S-Id}:event-bus/subscriber-bus
 ```
 
-And account **S**: has these resources: 
+And account **S** has these resources: 
 
 ```yaml
 Resources:
@@ -131,7 +131,7 @@ Resources:
             events:creatorAccount: "${aws:PrincipalAccount}"
 ```
 
-And account **S**: has these resources: 
+And account **S** has these resources: 
 
 ```yaml
 Resources:
