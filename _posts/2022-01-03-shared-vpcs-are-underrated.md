@@ -58,7 +58,7 @@ Then we could apply an SCP to the prod OU that looks something like:
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "DenyDirectActionsFromOutsideVpc",
+            "Sid": "DenyFromOutsideVpcUsingEndpoints",
             "Effect": "Deny",
             "Action": "*",
             "Resource": "*",
@@ -66,8 +66,31 @@ Then we could apply an SCP to the prod OU that looks something like:
                 "Bool": {
                     "aws:ViaAWSService": "false"
                 },
+                "Null": {
+                    "aws:SourceIp": "true"
+                },
                 "StringNotEquals": {
                     "aws:SourceVpc": "vpc-08abc123",
+                    "aws:PrincipalTag/VpcLimited": "false"
+                }
+            }
+        },
+        {
+            "Sid": "DenyFromOutsideVpcNotUsingEndpoints",
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "*",
+            "Condition": {
+                "Bool": {
+                    "aws:ViaAWSService": "false"
+                },
+                "Null": {
+                    "aws:SourceVpc": "true"
+                },
+                "NotIpAddress": {
+                    "aws:SourceIp": ["1.2.3.1/32", "1.2.3.2/32", "1.2.3.3/32"]
+                },
+                "StringNotEquals": {
                     "aws:PrincipalTag/VpcLimited": "false"
                 }
             }
@@ -76,17 +99,22 @@ Then we could apply an SCP to the prod OU that looks something like:
 }
 ```
 
-This would restrict access to all AWS API calls from outside the VPC. In a 
-sufficiently complex account, there are likely going to need to be exceptions -
-and for those IAM roles you can add a `VpcLimited = false` tag. 
+For roles and users within the prod OU, this would require AWS API calls to be 
+made either through a VPC endpoint (for services where those have been 
+configured) or via the elastic IP addresses associated with the NAT gateway. In 
+a sufficiently complex account,  there are likely going to need to be exceptions 
+- and for those IAM roles you  can add a `VpcLimited = false` tag. 
 
 ## Wrap up
 
 So there you have it: VPC sharing can improve security posture and reduce costs
 at the same time. Or at least it feels that way to me. I feel like I could be 
-missing something as I'm yet to see anyone talk about using this pattern. I'd 
-be keen to hear from folks who think this isn't feasible, please reach out to 
-me on [Twitter][my-twitter].
+missing something as I'm yet to see anyone talk about using this pattern. 
+
+I'd be keen to hear from folks who think this isn't feasible, please reach out 
+to  me on [Twitter][my-twitter]. **EDIT**: My gratitude to [Sean McLaughlin][sean] 
+who did exactly that. I've amended the SCP to account for non-endpoint use and 
+reworded to (hopefully) clarify.
 
 ## The boring details
 
@@ -109,4 +137,5 @@ engineers that can actually understand it.
 [tweets]: https://twitter.com/hhopk/status/1477003096572186630
 [boundary]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 [my-twitter]: https://twitter.com/__steele
+[sean]: https://twitter.com/AliceRoryDad
 [tgw]: https://aws.amazon.com/transit-gateway/
