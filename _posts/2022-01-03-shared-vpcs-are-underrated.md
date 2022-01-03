@@ -102,8 +102,8 @@ Then we could apply an SCP to the prod OU that looks something like:
 For roles and users within the prod OU, this would require AWS API calls to be 
 made either through a VPC endpoint (for services where those have been 
 configured) or via the elastic IP addresses associated with the NAT gateway. In 
-a sufficiently complex account,  there are likely going to need to be exceptions 
-- and for those IAM roles you  can add a `VpcLimited = false` tag. 
+a sufficiently complex account,  there are likely going to need to be exceptions - 
+and for those IAM roles you  can add a `VpcLimited = false` tag. 
 
 ## Wrap up
 
@@ -128,7 +128,7 @@ That adds up quickly if your app uses a handful of services. SQS, SNS, KMS,
 STS, X-Ray, ECR, ECS are a reasonable example for a modern containerised app.
 
 Maybe the above is all too much, so you instead decide to centralise things
-using [AWS Transit Gateway][tgw]. That is $0.05 per hour == **$37
+using [AWS Transit Gateway][tgw]. That is $0.05 per hour = **$37
 per month** per VPC. And a few hundred thousand more per year for the network 
 engineers that can actually understand it.
 
