@@ -5,7 +5,7 @@ date: 2022-02-03 15:48:52 +1100
 categories: blog
 ---
 
-In September 2020, I published a [guest blog post][ian-blog] on [Ian McKay][ian]'s
+In September 2020, I published a [guest blog post][ian-blog] on [Ian Mckay][ian]'s
 blog. The tl;dr is that "escaping" a privileged container running in an Amazon-managed
 AWS account isn't a security concern for Amazon, thanks to defence-in-depth on
 both an EC2 and IAM level. Here's a few paragraphs I left out of that blog post
