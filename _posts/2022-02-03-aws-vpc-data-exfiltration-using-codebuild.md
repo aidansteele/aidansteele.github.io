@@ -54,6 +54,17 @@ instead pass `--socks4` everything will work, but the DNS resolution of `google.
 will be done by the container and your malicious DNS queries could be recorded 
 by [Route 53 Resolver Query Logs][query-logs] in the customer VPC, not the AWS VPC.
 
+## What would be better?
+
+The CodeBuild host EC2 instance seems to only need Internet connectivity in 
+order to connect to `codebuild.{region}.amazonaws.com` and associated services.
+Instead of using a NAT gateway, perhaps the AWS-managed VPC could use interface
+VPC endpoints. That would eliminate the issue entirely.
+
+That said, do I consider this a huge issue? Not really. CodeBuild builds are
+logged in CloudTrail and CodeBuild itself, so forensics are easy enough. It's
+unlikely that this is going to be a problem in reality. But I found it fun and
+worth sharing.
 
 [ian-blog]: https://onecloudplease.com/blog/security-september-escaping-codebuild
 [ian]: https://twitter.com/iann0036
