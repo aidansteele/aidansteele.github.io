@@ -184,7 +184,7 @@ function onRequest(event) {
 We haven't broken TLS. For this app, we create a custom root certificate authority 
 and add it to the trust store on our EC2 instances. Rather than deal in sensitive 
 private key material, we use  AWS [KMS' support for asymmetric keys][kms] for our 
-private key. [`generate.go`](/kmssigner/generate/generate.go) creates a certificate 
+private key. [`generate.go`][kmsgen] creates a certificate 
 using that key. That certificate is then stored and trusted on the OS (e.g. in 
 Amazon Linux 2 you would run `cat $CERT >> /usr/share/pki/ca-trust-source/anchors/lol.pem && update-ca-trust`)
 
@@ -200,3 +200,17 @@ unwise).
 
 [intro-blog]: https://aws.amazon.com/blogs/aws/introducing-aws-gateway-load-balancer-easy-deployment-scalability-and-high-availability-for-partner-appliances/
 [sentia]: https://www.sentiatechblog.com/geneveproxy-an-aws-gateway-load-balancer-reference-application
+[extcap]: https://www.wireshark.org/docs/man-pages/extcap.html
+[klf]: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/Key_Log_Format
+[twit]: https://twitter.com/__steele
+[kms]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+[cff-model]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
+[workspaces]: https://aws.amazon.com/workspaces/
+[extract-acct-id]: https://awsteele.com/blog/2020/09/26/aws-access-key-format.html
+[apigw-auth]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+[nickf]: https://github.com/Frichetten
+[agent]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
+[har]: https://en.wikipedia.org/wiki/HAR_(file_format)
+[amz-blog]: https://aws.amazon.com/blogs/networking-and-content-delivery/integrate-your-custom-logic-or-appliance-with-aws-gateway-load-balancer/
+[upsidedown]: https://www.ex-parrot.com/pete/upside-down-ternet.html
+[kmsgen]: https://github.com/aidansteele/flowdog/blob/main/kmssigner/generate/generate.go
