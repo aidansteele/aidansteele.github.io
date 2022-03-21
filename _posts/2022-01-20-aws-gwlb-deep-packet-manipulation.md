@@ -103,7 +103,7 @@ These are really just intended to demonstrate that anything is possible in the
 world of software-defined networking. Please ping me on [Twitter][twit] with any
 cool ideas you have. Or any enhancements to the following ideas.
 
-* [`lambda_acceptor/lambda_acceptor.go`](https://github.com/aidansteele/flowdog/blob/main/examples/examples/lambda_acceptor/lambda_acceptor.go)
+* [`lambda_acceptor/lambda_acceptor.go`](https://github.com/aidansteele/flowdog/blob/main/examples/lambda_acceptor/lambda_acceptor.go)
   takes the idea of [AWS API Gateway Lambda authorizers][apigw-auth] and applies
   it to VPC flows. At the start of every new connection, a Lambda function is
   invoked and returns a decision about whether to allow or drop the connection.
@@ -111,7 +111,7 @@ cool ideas you have. Or any enhancements to the following ideas.
 
   ![authorizer-io](/assets/2022-01-20-authorizer.png)
 
-* [`flowdogshark/flowdogshark.go`](https://github.com/aidansteele/flowdog/blob/main/examples/examples/flowdogshark/flowdogshark.go) is an
+* [`flowdogshark/flowdogshark.go`](https://github.com/aidansteele/flowdog/blob/main/examples/flowdogshark/flowdogshark.go) is an
   [`extcap`][extcap] plugin for Wireshark that allows you to live-attach 
   Wireshark to flowdog and capture traffic flowing through your VPC. Given that
   flowdog does TLS interception (see later section in README), it can even use 
@@ -120,20 +120,20 @@ cool ideas you have. Or any enhancements to the following ideas.
 
   ![wireshark demo](/assets/2022-01-20-wireshark-demo.png)
 
-* [`account_id_emf/account_id_emf.go`](https://github.com/aidansteele/flowdog/blob/main/examples/examples/account_id_emf/account_id_emf.go)
+* [`account_id_emf/account_id_emf.go`](https://github.com/aidansteele/flowdog/blob/main/examples/account_id_emf/account_id_emf.go)
   is an example of scanning all AWS API calls made within the VPC for SigV4 auth
   headers, [extracting the AWS account ID][extract-acct-id] and emitting it to
   CloudWatch via specially-formatted logs that are turned into metrics. This could
   be used to alert on newly-seen account IDs: a potential indicator of a compromised
   instance.
 
-* [`upsidedown/upsidedown.go`](https://github.com/aidansteele/flowdog/blob/main/examples/examples/upsidedown/upsidedown.go) is an 
+* [`upsidedown/upsidedown.go`](https://github.com/aidansteele/flowdog/blob/main/examples/upsidedown/upsidedown.go) is an 
   implementation of the classic [Upside-Down-Ternet][upsidedown]. It blurs and 
   rotates every image 180º when browsing the net.
 
   ![upside down](/assets/2022-01-20-upside-down.png)
 
-* [`sts_rickroll/sts_rickroll.go`](https://github.com/aidansteele/flowdog/blob/main/examples/examples/sts_rickroll/sts_rickroll.go) is
+* [`sts_rickroll/sts_rickroll.go`](https://github.com/aidansteele/flowdog/blob/main/examples/sts_rickroll/sts_rickroll.go) is
   another silly example. Here we are modifying the response of the AWS API call
   for `aws sts get-caller-identity` to return something unexpected. You could
   equally use the same logic to return your favourite video on every seventh
@@ -141,12 +141,12 @@ cool ideas you have. Or any enhancements to the following ideas.
 
   ![sts-rickroll](/assets/2022-01-20-sts-rickroll.png)
 
-* [`gwlb/websocket.go`](https://github.com/aidansteele/flowdog/blob/main/examples/gwlb/websocket.go) is not an example, but I got lazy.
+* [`gwlb/websocket.go`](https://github.com/aidansteele/flowdog/blob/main/gwlb/websocket.go) is not an example, but I got lazy.
   [Nick Frichette][nickf] had the great suggestion of intercepting the [SSM agent][agent]
   for shenanigans. This code will detect websockets and parse messages, but right
   now only passes them back and forth. Soon™.
 
-* [`cloudfront_functions/rick.js`](https://github.com/aidansteele/flowdog/blob/main/examples/examples/cloudfront_functions/rick.js) is
+* [`cloudfront_functions/rick.js`](https://github.com/aidansteele/flowdog/blob/main/examples/cloudfront_functions/rick.js) is
   an example of how the [CloudFront Functions][cff-model] event model can be
   applied to rewriting HTTP(S) requests inside a VPC. In this particular example,
   we're ensuring that any [AWS Workspaces][workspaces] users visiting YouTube
