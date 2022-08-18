@@ -136,7 +136,7 @@ approach from a standard workflow, the parent IAM role instead needs to be:
                 Action:
                   - states:DescribeExecution
                   - states:StopExecution
-                Resource: !Ref Child
+                Resource: !Sub arn:aws:states:${AWS::Region}:${AWS::AccountId}:execution:${Child.Name}
               - Effect: Allow
                 Action:
                   - events:PutTargets
