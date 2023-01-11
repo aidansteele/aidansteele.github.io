@@ -58,6 +58,8 @@ and you create a role for GitHub Actions to assume with this:
           - Effect: Allow
             Action: sts:AssumeRoleWithWebIdentity
             Principal:
+              # this line horizontally scrolls. 
+              # the important part is on the end!
               Federated: !Sub arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com/octocat-inc
             Condition:
               StringLike:
