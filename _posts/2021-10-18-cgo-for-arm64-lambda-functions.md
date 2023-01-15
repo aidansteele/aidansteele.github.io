@@ -13,7 +13,7 @@ it feels impossible. I mean, who wants to deal with this error message?
 ![cgo error message](/assets/2021-10-18-error-message.png)
 
 It turns out there's a solution: to use [Zig][ziglang] to compile and link your
-C code. Zig is an extremely interesting new programming lanugage that seeks to
+C code. Zig is an extremely interesting new programming language that seeks to
 replace C. It also happens to be able to compile C via `zig cc`. It can also
 _cross_-compile C. Check out this amazing [blog post][zig-blog] by its creator.
 Anyway, here's how to do it:
