@@ -65,3 +65,4 @@ API has a boolean `UpdateKeyPair` response field)
 [dhmc]: https://docs.aws.amazon.com/systems-manager/latest/userguide/managed-instances-default-host-management.html
 [cred-process]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html
 [github]: https://github.com/aidansteele/awsaccountcreds
+[ec2ic]: https://github.com/aws/aws-ec2-instance-connect-config/blob/32d7656adbf5f4b59f9aacd519b545dcedec7fe1/src/bin/eic_harvest_hostkeys#L119
