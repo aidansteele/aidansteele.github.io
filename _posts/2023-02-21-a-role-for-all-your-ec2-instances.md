@@ -66,10 +66,11 @@ API has a boolean `UpdateKeyPair` response field)
 
 I reported the potential for passing an over-privileged role to the AWS security
 team, and they described it as working as designed. Which is correct, and this
-probably falls on the customer side of the shared responsibility model. But
-the risk remains: anyone with `ssm:UpdateServiceSetting` and `iam:PassRole`
-can affect every EC2 instance in a single API call. And in my experience, these
-permissions are typically granted to developers.
+probably falls on the customer side of the shared responsibility model. (Though
+I'm not sure why Systems Manager doesn't pass `PolicyArns=[arn:aws:iam::aws:policy/AmazonSSMManagedEC2InstanceDefaultPolicy]` 
+when calling `sts:AssumeRole`) But the risk remains: anyone with `ssm:UpdateServiceSetting` 
+and `iam:PassRole` can affect every EC2 instance in a single API call. And in 
+my experience, these permissions are typically granted to developers.
 
 The other risk is that even though this is described as a solution for managing
 instances that don't already have SSM privileges, it affects those instances
