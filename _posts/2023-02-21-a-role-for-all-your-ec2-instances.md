@@ -62,6 +62,22 @@ API has a boolean `UpdateKeyPair` response field)
 
 ![sequence diagram](/assets/2023-02-21-sequence-diagram.png)
 
+## Risks
+
+I reported the potential for passing an over-privileged role to the AWS security
+team, and they described it as working as designed. Which is correct, and this
+probably falls on the customer side of the shared responsibility model. But
+the risk remains: anyone with `ssm:UpdateServiceSetting` and `iam:PassRole`
+can affect every EC2 instance in a single API call. And in my experience, these
+permissions are typically granted to developers.
+
+The other risk is that even though this is described as a solution for managing
+instances that don't already have SSM privileges, it affects those instances
+too. Because the SSM agent tries the instance profile first (and only falls back
+to DHMC if the instance profile fails), it means that those instances remain
+"unregistered" and `ssm:RegisterManagedInstance` will succeed for a process
+running on the machine.
+
 [dhmc]: https://docs.aws.amazon.com/systems-manager/latest/userguide/managed-instances-default-host-management.html
 [cred-process]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html
 [github]: https://github.com/aidansteele/awsaccountcreds
