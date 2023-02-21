@@ -79,7 +79,21 @@ to DHMC if the instance profile fails), it means that those instances remain
 "unregistered" and `ssm:RegisterManagedInstance` will succeed for a process
 running on the machine.
 
+## Thanks
+
+Thanks to [Ian Mckay][ian], [Nick Frichette][nick] and [Christophe Tafani-Dereeper][christophe]
+for sanity-checking this. Also big thanks to Ben Bridts, who [pointed out][ben-tweet]
+that Systems Manager couldn't just pass the `AmazonSSMManagedEC2InstanceDefaultPolicy`
+managed policy as a session policy, because that would preclude the S3 and
+KMS privileges needed for other parts of Systems Manager functionality. Also
+thanks to the Cloud Security Forum folks whose discussion of this functionality
+prompted me to do the research.
+
 [dhmc]: https://docs.aws.amazon.com/systems-manager/latest/userguide/managed-instances-default-host-management.html
 [cred-process]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html
 [github]: https://github.com/aidansteele/awsaccountcreds
 [ec2ic]: https://github.com/aws/aws-ec2-instance-connect-config/blob/32d7656adbf5f4b59f9aacd519b545dcedec7fe1/src/bin/eic_harvest_hostkeys#L119
+[ian]: https://twitter.com/iann0036
+[nick]: https://twitter.com/Frichette_n
+[christophe]: https://twitter.com/christophetd
+[ben-tweet]: https://twitter.com/benbridts/status/1627844227399917569
