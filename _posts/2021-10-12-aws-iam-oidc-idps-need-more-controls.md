@@ -68,6 +68,10 @@ but _something_ is needed.
 
 ### Claim-to-tag mappings
 
+**Update**: This doesn't exist in _AWS IAM_ yet, but it can be achieved via
+AWS Cognito. I wrote a [follow-up blog post][follow-up] that explains how
+to achieve it.
+
 AWS IAM has supported role session tags for a while now. Have you ever looked
 at how they work for roles bootstraped from OIDC IDPs? Here's what needs to
 go in the JWT issued by the IDP:
@@ -103,3 +107,4 @@ use.
 
 [previous-post]: /blog/2021/09/15/aws-federation-comes-to-github-actions.html
 [boundaries]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+[follow-up]: https://awsteele.com/blog/2023/10/25/aws-role-session-tags-for-github-actions.html

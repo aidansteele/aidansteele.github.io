@@ -5,6 +5,11 @@ date: 2022-07-14 15:07:52 +1000
 categories: blog
 ---
 
+**Update**: AWS now has an [open source implementation][aws-oss] of a Roles
+Anywhere `credential_process` provider - and it even supports PKCS#11. I'll 
+keep the following project online for historical purposes, but there's not
+much need for it.
+
 I just published a proof-of-concept CLI tool named [`openrolesanywhere`][github].
 It lets you assume a role in AWS using IAM Roles Anywhere and a private key 
 stored in your SSH agent - rather than on-disk as required by the official client.
@@ -13,4 +18,5 @@ copy of the SigV4 signer in the AWS SDK for Go.
 
 Check out the [repo][github] for more details.
 
+[aws-oss]: https://github.com/aws/rolesanywhere-credential-helper
 [github]: https://github.com/aidansteele/openrolesanywhere

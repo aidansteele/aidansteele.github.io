@@ -5,6 +5,13 @@ date:   2020-09-29 12:12:52 +1000
 categories: blog
 ---
 
+## Update
+
+In April 2022, AWS released `aws:ResourceOrgID` (and a couple of other related
+condition keys). This [blog post][launch-post] does a great job of describing 
+how it works. I'll leave the rest of this blog post in place for historical
+interest, but it's now outdated.
+
 ## Background
 
 In May 2018, AWS [released][aws-blog] a new IAM condition key, `aws:PrincipalOrgID`.
@@ -192,6 +199,7 @@ I probably am wrong. Or maybe I've misestimated the likelihood of something. Or
 very likely: I've not considered another great reason why this would be a wonderful
 new condition key. Please reach out to me on Twitter and share your thoughts.
 
+[launch-post]: https://aws.amazon.com/blogs/security/how-to-control-access-to-aws-resources-based-on-aws-account-ou-or-organization/
 [aws-blog]: https://aws.amazon.com/blogs/security/control-access-to-aws-resources-by-using-the-aws-organization-of-iam-principals/
 [square-blog]: https://developer.squareup.com/blog/adopting-aws-vpc-endpoints-at-square/
 [docs]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html

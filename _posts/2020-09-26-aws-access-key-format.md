@@ -5,6 +5,13 @@ date:   2020-09-26 10:40:52 +1000
 categories: blog
 ---
 
+## Update
+
+Tal Be'ery published a [blog post][tal-blog] wherein he determined the _correct_
+bit-shifting and masking to decode account IDs from access key IDs. The code
+at the end of this article has not been updated, so I recommend referring to
+his code sample.
+
 ## Experimentation
 
 I was thinking about AWS access key IDs yesterday. Specifically, the one that's
@@ -144,6 +151,7 @@ corroborate that: a key 508 days old has a `Y` and a key `648` days old has a `J
 Please join the conversation if you have any wild theories, I'm keen to explore
 this pointless space. Here's the [tweet][tweet] again if you want to respond.
 
+[tal-blog]: https://medium.com/@TalBeerySec/a-short-note-on-aws-key-id-f88cc4317489
 [docs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids
 [scott]: https://summitroute.com/blog/2018/06/20/aws_security_credential_formats/
 [play]: https://play.golang.org/p/-VgXwYUfRUC
