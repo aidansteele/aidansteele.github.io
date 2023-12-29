@@ -191,7 +191,7 @@ it returns the uncompressed file contents - which get returned back to the clien
   and then parse _those_ line-by-line. Here's a [function][select-func] I wrote 
   for that.
 * The absolute highlight of working on this is that it lead to getting in touch
-  with [Jon Johnson[jon-squared]. He's a very smart guy and I am honoured to have 
+  with [Jon Johnson][jon-squared]. He's a very smart guy and I am honoured to have 
   played my part in his enthusiasm for gzip. 
 
 [imagecx]: https://ima.ge.cx/
