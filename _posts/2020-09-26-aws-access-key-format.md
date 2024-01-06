@@ -5,13 +5,6 @@ date:   2020-09-26 10:40:52 +1000
 categories: blog
 ---
 
-## Update
-
-Tal Be'ery published a [blog post][tal-blog] wherein he determined the _correct_
-bit-shifting and masking to decode account IDs from access key IDs. The code
-at the end of this article has not been updated, so I recommend referring to
-his code sample.
-
 ## Experimentation
 
 I was thinking about AWS access key IDs yesterday. Specifically, the one that's
@@ -77,7 +70,7 @@ $ aws sts get-access-key-info --access-key-id ASIAY34FZKBNKMUTVV7A --query Accou
 So it was reduced by 2. Then I tried decrementing `keyid[10]` (`ASIAY34FZKAOKMUTVV7A`) 
 and got `609629065244` - a reduction of 64. Looks like this is big-endian. I
 found that a `keyid[4:12]` of `QAAAAAAA` would result in an account ID of 
-`000000000000` and `6RVFFB77` in ``999999999998`. 
+`000000000000` and `6RVFFB77` in `999999999998`. 
 
 ## The resulting code
 
@@ -93,25 +86,37 @@ import (
 	"github.com/kenshaw/baseconv"
 )
 
-func getAccessKeyInfo(accessKeyId string) string {
+// technically this code works equally well for principal IDs (e.g. AROA or AIDA prefixes) but
+// i don't want to make the code sample any more complex
+var ErrMissingPrefix = errors.New("only keys with AKIA or ASIA prefixes are supported")
+var ErrUnsupportedKey = errors.New("old-format keys (created before ~early 2019) are unsupported")
+
+func getAccessKeyInfo(accessKeyId string) (string, error) {
+	if strings.HasPrefix(accessKeyId, "AKIA") || strings.HasPrefix(accessKeyId, "ASIA") {
+		if accessKeyId[5] < 'Q' {
+			return "", ErrUnsupportedKey
+		}
+	} else {
+		return "", ErrMissingPrefix
+	}
+
 	base10 := "0123456789"
 	base32AwsFlavour := "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
-	
+
 	offsetStr, _ := baseconv.Convert("QAAAAAAA", base32AwsFlavour, base10)
 	offset, _ := strconv.Atoi(offsetStr)
-	
+
 	offsetAccountIdStr, _ := baseconv.Convert(accessKeyId[4:12], base32AwsFlavour, base10)
 	offsetAccountId, _ := strconv.Atoi(offsetAccountIdStr)
 
-	accountId := 2*(offsetAccountId-offset)
-	
+	accountId := 2 * (offsetAccountId - offset)
+
 	if strings.Index(base32AwsFlavour, accessKeyId[12:13]) >= strings.Index(base32AwsFlavour, "Q") {
 		accountId++
 	}
-	
-	return fmt.Sprintf("%012d", accountId)
-}
 
+	return fmt.Sprintf("%012d", accountId), nil
+}
 
 func main() {	
 	fmt.Println(getAccessKeyInfo("ASIAY34FZKBOKMUTVV7A"))
@@ -128,16 +133,24 @@ know, I know!) It begins `AKIAJ...` - what? Last I checked, J came before Q in
 the alphabet and so my code returned a negative account ID. But my account ID
 isn't negative. Well shit.
 
-I tried what I tried earlier: tweaking the last character. No luck. Then I tried
-some other characters - no luck there either. So I guess this type of key is
-different. I then looked at the distribution of `keyid[4]` in my CloudTrail logs.
-Most are in the range `Q-Z2-7`, but there are some that are `I` or `J`. What's
-different about this key? Is it an account thing?
+These types of keys are different. I looked at the distribution of `keyid[4]` 
+in my CloudTrail logs. Most are in the range `Q-Z2-7`, but there are some that 
+are `I` or `J`. The newer keys (range `Q-Z2-7`) can have their last bytes changed
+and `sts:GetAccessKeyInfo` will still return correct results. The older keys 
+(`I` and `J`) will return `ValidationError` if the last bytes are changed. They
+also return the same error if the key is deleted (unlike new keys). This leads 
+me to believe that the older keys have no internal structure and the account ID 
+has to be looked up from a datastore. 
 
 I asked for help on [Twitter][tweet] and got some great responses. Especially 
-helpful was @NYSharpie's [tweet][nysharpie] where he noticed keys newer than
-500-600 days are when it switched to >= Q. Looking in my own account seems to
-corroborate that: a key 508 days old has a `Y` and a key `648` days old has a `J`.
+helpful was @NYSharpie's [tweet][nysharpie] where he noticed keys created after 
+early 2019 are when it switched to >= Q. Looking in my own account seems to
+corroborate that: a key from December 2018 has a `Y` and a key from May 2019 
+has a `J`.
+
+I've also [learned][old-key] that keys created before ~2010 don't even have the 
+`AKIA` prefix! E.g. the key ID `1YRA5YCR63BKA0BX35G2` was created in 2008 and
+the STS API will return the correct account ID for it. 
 
 ## Questions
 
@@ -151,9 +164,26 @@ corroborate that: a key 508 days old has a `Y` and a key `648` days old has a `J
 Please join the conversation if you have any wild theories, I'm keen to explore
 this pointless space. Here's the [tweet][tweet] again if you want to respond.
 
-[tal-blog]: https://medium.com/@TalBeerySec/a-short-note-on-aws-key-id-f88cc4317489
+## Updates
+
+25/10/2023: Tal Be'ery published a [blog post][tal-blog] wherein he used
+bit-shifting and masking to decode account IDs from access key IDs in Python. 
+This would be more efficient than my code sample which has a condition (checking
+if a character is greater than or equal to `Q`)
+
+07/01/2024: Clarified behaviour of old `AKIA` keys and even older `AKIA`-less 
+keys. Also updated code sample to explicitly fail for older keys (rather than
+returning negative account IDs)
+
+07/01/2024: [TruffleHog][trufflehog] now prints out account IDs based on Tal's 
+bit-shifting code. This knowledge is becoming useful!
+
+
 [docs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids
 [scott]: https://summitroute.com/blog/2018/06/20/aws_security_credential_formats/
 [play]: https://play.golang.org/p/-VgXwYUfRUC
 [tweet]: https://twitter.com/__steele/status/1309419535569616901
 [nysharpie]: https://twitter.com/NYSharpie/status/1309448974416457728
+[old-key]: https://twitter.com/__steele/status/1742753372816728178
+[tal-blog]: https://medium.com/@TalBeerySec/a-short-note-on-aws-key-id-f88cc4317489
+[trufflehog]: https://trufflesecurity.com/blog/research-uncovers-aws-account-numbers-hidden-in-access-keys/
