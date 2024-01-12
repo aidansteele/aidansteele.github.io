@@ -95,7 +95,7 @@ awscurl \
   ${CALLBACK_SERVICE_ENDPOINT_DNS}/${INSTANCE_ID}/credentials/role
 ```
 
-### Assorted thoughts
+## Assorted thoughts
 
 * There seem to be multiple ECS clusters per CloudShell AWS account. There are
   also multiple CloudShell AWS accounts per region. Two principals in my own account
@@ -122,9 +122,17 @@ awscurl \
   for their collaboration on poking at this. It helped a lot bouncing ideas around 
   with them. 
 
+## Update
+
+I just learned about [this write-up][ronin] of CloudShell published last year.
+What stood out to me is that CloudShell previously used Firecracker microVMs,
+but no longer does. I wonder why the migration to "regular" EC2 instances occurred.
+Maybe it was to support this new functionality (runner Docker containers)?
+
 [whats-new]: https://aws.amazon.com/about-aws/whats-new/2024/01/aws-cloudshell-docker-13-regions/
 [codebuild]: https://awsteele.com/blog/2022/02/03/aws-vpc-data-exfiltration-using-codebuild.html
 [top-image]: https://ima.ge.cx/public.ecr.aws/aidansteele/cloudshell:live_base_100@sha256:4f0e65aee2f0d3efcee5717afb8d559a413dccdc1077ee9ef214d382baecfc8f
 [inner-image]: https://ima.ge.cx/public.ecr.aws/aidansteele/cloudshell:scallop-customer-image-latest-patched@sha256:175f1cd92c6c4cf67433742e3fbf44983430d4f24f6c338241fd1569b0bde700
 [christophe]: https://twitter.com/christophetd
 [nick]: https://frichetten.com/
+[ronin]: https://ronin.ae/news/aws-cloudshell-analysis/
