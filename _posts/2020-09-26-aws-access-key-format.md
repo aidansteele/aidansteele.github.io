@@ -93,7 +93,7 @@ var ErrUnsupportedKey = errors.New("old-format keys (created before ~early 2019)
 
 func getAccessKeyInfo(accessKeyId string) (string, error) {
 	if strings.HasPrefix(accessKeyId, "AKIA") || strings.HasPrefix(accessKeyId, "ASIA") {
-		if accessKeyId[5] < 'Q' {
+		if accessKeyId[4] < 'Q' {
 			return "", ErrUnsupportedKey
 		}
 	} else {
