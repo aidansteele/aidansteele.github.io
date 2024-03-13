@@ -5,6 +5,14 @@ date: 2024-02-20 11:21:00 +1100
 categories: blog
 ---
 
+## Update (14 March, 2024)
+
+The AWS Security Outreach team contacted me to say that they've heard this
+feedback and the situation has improved. `explicitTrustGrant` is now 
+[documented][iam-docs] and appears on Google. I've also updated my quotes from 
+Arkadiy's article to reflect his changes. I continue to be impressed by Amazon's
+responsiveness to feedback published on some random personal blogs.
+
 ## tl;dr
 
 Search CloudTrail for instances of `AssumeRole` with 
@@ -33,8 +41,11 @@ out and I suspect they might be surprising to others. This is the first:
 
 The second is this:
 
-> Also until [very recently][aws-blog] every role was always allowed to assume 
-> itself, which similarly allowed you to change your own role session name.
+> Also until [very recently][aws-blog] roles implicitly trusted themselves from 
+> a role trust policy perspective (so if they had identity-based permissions to 
+> assume themselves, they could do so without an explicit grant in their trust 
+> policy, or vice versa), which similarly allowed some roles to change their own 
+> role session name.
 
 The AWS blog that Arkadiy links to actually briefly mentions that the implicit
 allowed self-assumption behaviour is **still present** for some roles - and it's
@@ -49,12 +60,11 @@ that is permitted by _explicit_ statements in the role's trust policy. We only
 want to identify roles that are still relying on the _implicit_ behaviour.
 
 It turns out that it is actually possible to identify the implicit behaviour, but
-I only stumbled across it by accident when reviewing CloudTrail logs. It doesn't
-appear to be documented by AWS on the Internet - there's only this copy of an 
-email pasted into a [GitHub discussion][github] and it doesn't even appear on 
-Google.
+I only stumbled across it by accident when reviewing CloudTrail logs. It wasn't
+documented on the Internet at the time I originally wrote this post, but AWS has
+since [documented][iam-docs] `explicitTrustGrant` and it appears in search results.
 
-![empty google results](/assets/2024-02-20-google-no-results.png)
+![google results](/assets/2024-02-20-google-results.png)
 
 ## Email
 
@@ -101,6 +111,7 @@ In the interest of searchability, I've reproduced the email from Amazon here:
 > Once a role is removed from the allow list, its role assumption calls will
 > always require an explicit trust grant.
 
+[iam-docs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html#cloudtrail-integration_role-trust-behavior
 [arkadiy]: https://arkadiyt.com/2024/02/18/detecting-manual-aws-actions-an-update/
 [aws-blog]: https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
 [github]: https://github.com/orgs/gruntwork-io/discussions/748
