@@ -42,12 +42,14 @@ using the GHA OIDC feature. It looks like this:
 
 ![trust policy important condition](/assets/2021-10-12-trust-condition.png)
 
-I have highlighted the most important part of the template. That condition
-is technically optional (in the sense that everything will work without it)
-but devastating if it is omitted. **It is the only thing that controls which
-repositories on GitHub are authorised to assume this role.** (GitHub allows 
-configuration of the `aud` claim, so the `ClientIdList` property of the OIDC 
-IDP is not a security control.)
+I have highlighted the most important part of the template. When this blog post
+was first published, that condition was technically optional (in the sense that 
+everything will work without it) but devastating if it was omitted. **It is the 
+only thing that controls which repositories on GitHub are authorised to assume 
+this role.** (GitHub allows configuration of the `aud` claim, so the `ClientIdList` 
+property of the OIDC  IDP is not a security control.) Since then, AWS has made
+the condition mandatory. Scott Piper over at Wiz has a [great write-up][wiz-update]
+on the happy ending.
 
 Many AWS customers now allow developers to freely create IAM roles, thanks to
 [permission boundaries][boundaries]. There is no analogue to permission boundaries
@@ -108,3 +110,4 @@ use.
 [previous-post]: /blog/2021/09/15/aws-federation-comes-to-github-actions.html
 [boundaries]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 [follow-up]: https://awsteele.com/blog/2023/10/25/aws-role-session-tags-for-github-actions.html
+[wiz-update]: https://www.wiz.io/blog/a-security-community-success-story-of-mitigating-a-misconfiguration
