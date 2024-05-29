@@ -89,7 +89,7 @@ import (
 // technically this code works equally well for principal IDs (e.g. AROA or AIDA prefixes) but
 // i don't want to make the code sample any more complex
 var ErrMissingPrefix = errors.New("only keys with AKIA or ASIA prefixes are supported")
-var ErrUnsupportedKey = errors.New("old-format keys (created before ~early 2019) are unsupported")
+var ErrUnsupportedKey = errors.New("old-format keys (created before 29 march 2019) are unsupported")
 
 func getAccessKeyInfo(accessKeyId string) (string, error) {
 	if strings.HasPrefix(accessKeyId, "AKIA") || strings.HasPrefix(accessKeyId, "ASIA") {
@@ -144,9 +144,8 @@ has to be looked up from a datastore.
 
 I asked for help on [Twitter][tweet] and got some great responses. Especially 
 helpful was @NYSharpie's [tweet][nysharpie] where he noticed keys created after 
-early 2019 are when it switched to >= Q. Looking in my own account seems to
-corroborate that: a key from December 2018 has a `Y` and a key from May 2019 
-has a `J`.
+early 2019 are when it switched to >= Q. Looking at resources in my own account,
+it looks like the switchover was sometime between the 27th of and 29th of March 2019.
 
 I've also [learned][old-key] that keys created before ~2010 don't even have the 
 `AKIA` prefix! E.g. the key ID `1YRA5YCR63BKA0BX35G2` was created in 2008 and
@@ -178,6 +177,8 @@ returning negative account IDs)
 07/01/2024: [TruffleHog][trufflehog] now prints out account IDs based on Tal's 
 bit-shifting code. This knowledge is becoming useful!
 
+29/05/2024: I've narrowed down the switchover window to sometime between 27-29th
+of March 2019.
 
 [docs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids
 [scott]: https://summitroute.com/blog/2018/06/20/aws_security_credential_formats/
