@@ -15,8 +15,9 @@ which KMS key do you think is used to encrypt the object?
 If you guessed key 2 (i.e. the one in the same account as the role) you would 
 be right - and you would have known more than I did this morning. I assumed it
 would be key 1, i.e. the one living in the same account as the bucket. I would
-wager a guess that most people would think the same as I did when they are
-configuring their bucket's encryption configuration.
+wager a guess that most people would think the same as I did (i.e. that 
+unqualified key IDs and aliases are resolved relative to the bucket, not the 
+caller) when they are configuring their bucket's encryption configuration.
 
 ## Why is this a problem?
 
