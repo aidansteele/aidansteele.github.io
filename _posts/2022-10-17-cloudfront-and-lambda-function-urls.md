@@ -11,7 +11,7 @@ A common complaint was the lack of support for custom domains: it only supported
 the URLs it would generate that look like `lprqaxgvt4f6ab3dbj3ixftr640uzgie.lambda-url.ap-southeast-2.on.aws`.
 
 But that's where CloudFront comes in useful. Not only can it provide us with 
-custom domain functionality, but we (obviously?) get caching support as well.
+custom domain functionality, but we get caching, WAF support, etc as well.
 Here's a template I've been using for my apps:
 
 ```yaml
@@ -37,7 +37,7 @@ Resources:
       Runtime: provided.al2
       Handler: unused
       FunctionUrlConfig:
-        AuthType: NONE
+        AuthType: AWS_IAM
 
   CloudFront:
     Type: AWS::CloudFront::Distribution
@@ -60,12 +60,31 @@ Resources:
         Origins:
           - Id: web
             DomainName: !Select [2, !Split ["/", !GetAtt FunctionUrl.FunctionUrl]]
+            OriginAccessControlId: !Ref OAC
             CustomOriginConfig:
               OriginProtocolPolicy: https-only
               OriginSSLProtocols: [TLSv1.2]
             OriginShield:
               Enabled: true
               OriginShieldRegion: !Ref AWS::Region
+
+  Permission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunctionUrl
+      FunctionName: !Ref Function.Alias
+      FunctionUrlAuthType: AWS_IAM
+      Principal: cloudfront.amazonaws.com
+      SourceArn: !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFront}
+
+  OAC:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Ref AWS::StackName
+        OriginAccessControlOriginType: lambda
+        SigningBehavior: always
+        SigningProtocol: sigv4
 
   Record:
     Type: AWS::Route53::RecordSet
@@ -77,5 +96,10 @@ Resources:
         DNSName: !GetAtt CloudFront.DomainName
         HostedZoneId: Z2FDTNDATAQYW2 # this is documented as the cloudfront hosted zone id
 ```
+
+**Update 24/07/2024**: CloudFront added support for AWS IAM authentication when
+connecting to Lambda function URLs. I have updated the template to use that. This
+means that even if an attacker discovers your Lambda function URL, they can't
+bypass CloudFront - this is useful if you rely on WAF protections.
 
 [aws-blog]: https://aws.amazon.com/blogs/aws/announcing-aws-lambda-function-urls-built-in-https-endpoints-for-single-function-microservices/
