@@ -31,9 +31,10 @@ a parenthetical like _(even if the role's max session duration is only one hour)
 
 Other things that surprised me when I was digging into this:
 
-CloudTrail will log a call to this endpoint (the event name is `GetSigninToken`),
-but it doesn't log the requested `SessionDuration`. That feels like useful info
-to log: I'd like to know how often people in my organisation are using this.
+CloudTrail will [log][cloudtrail] a call to this endpoint (the event name is 
+`GetSigninToken`) but it doesn't log the requested `SessionDuration`. That feels 
+like useful info to log: I'd like to know how often people in my organisation 
+are using this.
 
 Once you have a 12 hour console session, you can extract credentials that are
 usable in your terminal. Simply open CloudShell and run this command: 
@@ -50,4 +51,5 @@ to things they shouldn't have access to), but it might be concerning if your
 environment relies on an assumption that role sessions are extremely short-lived.
 
 [fed-docs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+[cloudtrail]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-aws-console-sign-in-events.html#cloudtrail-event-reference-aws-console-sign-in-events-federated-user
 [htc]: https://hackingthe.cloud/aws/post_exploitation/get_iam_creds_from_console_session/
