@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Surprising behaviour in AWS web console session duration
-date: 2024-08-05 12:36:00 +0100
+date: 2024-08-05 16:26:00 +1100
 categories: blog
 ---
 
