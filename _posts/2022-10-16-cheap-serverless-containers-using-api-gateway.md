@@ -92,7 +92,7 @@ Resources:
     Properties:
       Name: vpclink
       SecurityGroupIds:
-        - !!Ref VpcLinkSecurityGroup
+        - !Ref VpcLinkSecurityGroup
       SubnetIds:
         - !Ref SubnetA
         - !Ref SubnetB
