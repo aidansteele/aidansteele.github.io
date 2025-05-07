@@ -5,6 +5,8 @@ date: 2024-11-09 14:57:00 +1100
 categories: blog
 ---
 
+**UPDATE**: My dream came true - almost. See follow-up [post][follow-up].
+
 AWS re:Invent 2024 is fast approaching and there's usually a flurry of exciting
 new services and features for existing services launched around this time each
 year. I'll be there in person this year - come say hello if you are too!
@@ -29,4 +31,5 @@ ARN does not match `arn:aws:iam::*:role/service-role/*`". This would allow me
 to have an audit trail of atypical access (e.g. a developer downloading an object 
 as part of debugging), while cutting out 99% of the noise - and therefore cost.
 
+[follow-up]: /blog/2025/05/07/cloudtrail-wish-almost-granted.html
 [doc]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
