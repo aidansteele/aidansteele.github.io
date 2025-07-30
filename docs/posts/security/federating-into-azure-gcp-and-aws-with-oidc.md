@@ -38,9 +38,7 @@ that consists of four modules:
 `idp`: This module implements the publicly-accessible part of an OIDC identity
 provider. Specifically, it provisions a KMS key (hosted in AWS KMS), a Lambda 
 function and a URL for that function. The function serves two paths: `/{tenant}/.well-known/openid-configuration`
-and `{tenant}/.well-known/jwks`. The first one is defined in the OIDC spec. The second
-one is referenced by the first one and contains the RSA public key in JWKS format
-as per the spec.
+and `{tenant}/.well-known/jwks` as per the OIDC spec.
 
 `azure`, `gcp` and `aws`: These modules implement the resources required to 
 federate into their corresponding clouds using an OIDC token. More on these in each
