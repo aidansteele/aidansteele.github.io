@@ -10,26 +10,25 @@ categories:
   - OIDC
 ---
 
+Lately, I've been interested in how third party vendors can best authenticate
+into their customers' cloud accounts. The status quo in AWS is usually role assumption
+from the vendor's account to the customers', but what about GCP and Azure? Can
+OIDC be used to authenticate into all three clouds in approximately the same way?
+I think the answer is yes, and this blog post aims to show how to do so.
+
 <!-- more -->
 
 Recently, I've been learning more about GCP and Azure. Specifically, I wanted 
 to know the best way to federate into another organisation's projects/subscriptions
-and whether there was any common ground with AWS, e.g. OIDC. What I learned is 
-that the state of the art seems to be... a bit lacklustre? Long-term credentials
-abound, even at the vendors that I consider to be best-in-class (Datadog, etc.)
+and whether there was any common ground with AWS, e.g. OIDC. My partner was a 
+big help here. She did a lot of research and experimentation and got it all working. 
+I terraformed the setup and wrote this blog post. 
 
-This isn't really the clouds' fault per se, as I see that both GCP and Azure support
-federation using OIDC. Maybe the functionality was introduced too recently, and
-inertia is holding back vendors? In any case, I figured I should try do it myself
-and see if maybe there was some show-stopping reason so few vendors are doing it.
-
-And that's how we ended up with today's blog post: a real world example of federating
-into Azure, GCP and AWS using OIDC. I wrote this because I genuinely couldn't find 
-code-level examples for the first two clouds elsewhere.
-I found plenty of blogs and docs about how to use OIDC to enable secretless 
-federation between GitHub, Azure DevOps, etc - but none on how a vendor should
-do it themselves! Could that be why it doesn't exist yet: because it hasn't been
-explained?
+I wanted to write this because I genuinely couldn't find code-level examples for 
+GCP or Azure elsewhere. I found plenty of blogs and docs about how to _use_ OIDC 
+to enable secretless federation between GitHub, Azure DevOps, etc - but none on 
+how a vendor should do it themselves! So this blog post aims to serve as an example
+of how I'd love to see vendors federate into my cloud accounts.
 
 ## The first step: deploy everything
 
@@ -38,8 +37,8 @@ that consists of four modules:
 
 `idp`: This module implements the publicly-accessible part of an OIDC identity
 provider. Specifically, it provisions a KMS key (hosted in AWS KMS), a Lambda 
-function and a URL for that function. The function serves two paths: `/.well-known/openid-configuration`
-and `/.well-known/jwks`. The first one is defined in the OIDC spec. The second
+function and a URL for that function. The function serves two paths: `/{tenant}/.well-known/openid-configuration`
+and `{tenant}/.well-known/jwks`. The first one is defined in the OIDC spec. The second
 one is referenced by the first one and contains the RSA public key in JWKS format
 as per the spec.
 
@@ -49,16 +48,12 @@ of the following sections.
 
 In order to deploy these resources, you will need an Azure tenant, a GCP organization
 and an AWS account. The free tier is fine for all of these. Clone the repo, edit the
-values in `main.tf` and run `terraform apply`.
+values in `vars.auto.tfvars` and run `make deploy`.
 
 ## The second step
 
-`terraform apply` should yield a handful of outputs. These will need to be inserted
-into `azure/azure.go`, `gcp/gcp.go`, `aws/aws.go` and `oidc/generate_oidc.go`. There
-are placeholder constants in each file.
-
-Once that's done, you're ready to go! Simply `cd` into each directory and `go run azure.go` 
-(etc) to your heart's content. The code isn't perfect, but it should be a reasonable
+You can now run `make run`. That will in turn run each of the sample apps to federate
+into AWS, GCP and Azure. The code isn't perfect, but it should be a reasonable
 starting point (e.g. it handles refreshing credentials when they expire, etc.)
 
 Each Go package does the moral equivalent of enumerating storage buckets in an 
@@ -95,4 +90,11 @@ identity pool at the organisation level. My example Terraform module does exactl
 this: grants the `viewer` role across the whole organization. Is that a bad idea?
 I guess I'll find out soon if a reader contacts me and lets me know!
 
+## A note on multi-tenancy
+
+Amazon have [docs][apn] where they strong advise tenant-specific OIDC issuer URLs
+to avoid confused deputy attacks. I won't bother to repeat their explanation here,
+but I'll add that I incorporated their advice into the sample code in the GitHub repo.
+
 [cloudfed]: https://github.com/aidansteele/cloudfed
+[apn]: https://apn-checklists.s3.amazonaws.com/foundational/partner-hosted/partner-hosted/CVLHEC5X7.html#technicalControls-cross-AccountAccess
