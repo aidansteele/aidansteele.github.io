@@ -108,6 +108,9 @@ extra:
       link: https://x.com/__steele
     - icon: fontawesome/solid/rss 
       link: https://awsteele.com/feed.xml
+  analytics:
+    provider: google
+    property: G-Z85XHGKQHZ
 extra_css:
   - stylesheets/extra.css
 use_directory_urls: false
