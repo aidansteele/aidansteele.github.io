@@ -5,6 +5,7 @@ date:
   created: 2023-01-11T03:30:52
 categories:
   - AWS
+  - OIDC
 ---
 
 <!-- more -->
