@@ -18,11 +18,10 @@ I think the answer is yes, and this blog post aims to show how to do so.
 
 <!-- more -->
 
-Recently, I've been learning more about GCP and Azure. Specifically, I wanted 
-to know the best way to federate into another organisation's projects/subscriptions
-and whether there was any common ground with AWS, e.g. OIDC. My partner was a 
-big help here. They did a lot of research and experimentation and got it all working. 
-I terraformed the setup and wrote this blog post. 
+I've been learning more about GCP and Azure recently. Specifically, whether it is 
+possible to de-duplicate federation logic between the clouds using OIDC. My partner 
+was a big help here. They did a lot of research and experimentation and got all the
+code working. I terraformed the setup and wrote this blog post. 
 
 I wanted to write this because I genuinely couldn't find code-level examples for 
 GCP or Azure elsewhere. I found plenty of blogs and docs about how to _use_ OIDC 
