@@ -91,7 +91,7 @@ I guess I'll find out soon if a reader contacts me and lets me know!
 
 ## A note on multi-tenancy
 
-Amazon have [docs][apn] where they strong advise tenant-specific OIDC issuer URLs
+Amazon have [docs][apn] where they strongly advise tenant-specific OIDC issuer URLs
 to avoid confused deputy attacks. I won't bother to repeat their explanation here,
 but I'll add that I incorporated their advice into the sample code in the GitHub repo.
 
