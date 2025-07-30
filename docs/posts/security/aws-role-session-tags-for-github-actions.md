@@ -6,6 +6,7 @@ date:
 categories:
   - AWS
   - OIDC
+  - GitHub
 ---
 
 <!-- more -->
