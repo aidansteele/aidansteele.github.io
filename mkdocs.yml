@@ -6,8 +6,6 @@ site_description: >-
 site_url: https://awsteele.com/
 site_author: Aidan W. Steele
 
-copyright: By Aidan W. Steele for Mumu, Lulu & Co.
-
 # Configuration
 theme:
   name: material
