@@ -21,7 +21,7 @@ I think the answer is yes, and this blog post aims to show how to do so.
 Recently, I've been learning more about GCP and Azure. Specifically, I wanted 
 to know the best way to federate into another organisation's projects/subscriptions
 and whether there was any common ground with AWS, e.g. OIDC. My partner was a 
-big help here. She did a lot of research and experimentation and got it all working. 
+big help here. They did a lot of research and experimentation and got it all working. 
 I terraformed the setup and wrote this blog post. 
 
 I wanted to write this because I genuinely couldn't find code-level examples for 
@@ -76,10 +76,12 @@ to AWS accounts), or you can assign them at a "management group" level, which se
 equivalent-ish to AWS organization units. Technically, you can also assign them at
 lower resource-based levels, too.
 
-NOTE: The role assignment resource is `azurerm_role_assignment` and the `azurerm`
-provider needs to be configured with a subscription, but if you specify a management
-group scope, does the resource really belong to a subscription? Stay tuned while I
-figure that out (or get in touch and explain it to me, please)
+!!! note
+
+    The role assignment resource is `azurerm_role_assignment` and the `azurerm`
+    provider needs to be configured with a subscription, but if you specify a management
+    group scope, does the resource really belong to a subscription? Stay tuned while I
+    figure that out (or get in touch and explain it to me, please)
 
 ## GCP specifics
 
