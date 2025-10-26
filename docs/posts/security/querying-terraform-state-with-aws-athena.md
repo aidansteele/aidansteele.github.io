@@ -60,10 +60,9 @@ STORED AS ION
 LOCATION 's3://your-s3-bucket-name-here/'
 ```
 
-!!! note
-  Note that we use the [Amazon Ion serde][ion]. This is because Terraform state
-  files are pretty-printed JSON - which is a subset of valid Ion files. The other
-  JSON-specific serdes in Athena don't support pretty-printed (multi-line) JSON.
+Note that we use the [Amazon Ion serde][ion]. This is because Terraform state
+files are pretty-printed JSON - which is a subset of valid Ion files. The other
+JSON-specific serdes in Athena don't support pretty-printed (multi-line) JSON.
 
 Now the fun part: querying it. First, a basic query to demonstrate the kind
 of data we're working with:
@@ -98,7 +97,8 @@ Some points to note, in no particular order:
   here. There's a small chance you might find them useful, but I didn't.
 
 Now what kind of useful queries can we write with this? That's where I'm hoping
-others can pitch in: please get in touch via Twitter, Bluesky, Slack, etc and let me know what you come up with.  
+others can pitch in: please get in touch via Twitter, Bluesky, Slack, etc and
+let me know what you come up with.  
 
 Here's one to get started: find every
 instance where you're one refactor away from a bad time:
