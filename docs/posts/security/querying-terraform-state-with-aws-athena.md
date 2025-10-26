@@ -21,14 +21,15 @@ made it up). A common pattern is to store all state for all stacks across an
 AWS organisation in a single bucket. This makes it easy for a central ops/security
 team to lock down and audit access to the bucket, ensure it is backed up 
 correctly, etc. Sometimes those central teams have questions like "what providers
-are developers using?" or "how many instances of aws_s3_bucket_versioning are
+are developers using?" or "how many instances of `aws_s3_bucket_versioning` are
 deployed across my org?" Those questions can be easily answered via Athena
 queries against that central bucket.
 
 Step one is creating a table in Athena. Note that this doesn't actually write 
 any data to S3, it's just metadata that Athena uses to locate and parse the data
-it finds in an S3 bucket. The table can be created using this Athena query:
+it finds in an S3 bucket. 
 
+The table can be created using this Athena query:
 ```sql
 CREATE EXTERNAL TABLE terraform_state(
   version int, 
@@ -59,9 +60,11 @@ STORED AS ION
 LOCATION 's3://your-s3-bucket-name-here/'
 ```
 
-Note that we use the [Amazon Ion serde][ion]. This is because Terraform state
-files are pretty-printed JSON - which is a subset of valid Ion files. The other
-JSON-specific serdes in Athena don't support pretty-printed (multi-line) JSON.
+!!! note
+
+  Note that we use the [Amazon Ion serde][ion]. This is because Terraform state
+  files are pretty-printed JSON - which is a subset of valid Ion files. The other
+  JSON-specific serdes in Athena don't support pretty-printed (multi-line) JSON.
 
 Now the fun part: querying it. First, a basic query to demonstrate the kind
 of data we're working with:
@@ -96,8 +99,9 @@ Some points to note, in no particular order:
   here. There's a small chance you might find them useful, but I didn't.
 
 Now what kind of useful queries can we write with this? That's where I'm hoping
-others can pitch in: please get in touch via Twitter, Bluesky, Slack, etc and
-let me know what you come up with. But here's one to get started: find every
+others can pitch in: please get in touch via Twitter, Bluesky, Slack, etc and let me know what you come up with.  
+
+Here's one to get started: find every
 instance where you're one refactor away from a bad time:
 
 ```sql
