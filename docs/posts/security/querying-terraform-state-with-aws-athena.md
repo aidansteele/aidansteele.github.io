@@ -61,7 +61,6 @@ LOCATION 's3://your-s3-bucket-name-here/'
 ```
 
 !!! note
-
   Note that we use the [Amazon Ion serde][ion]. This is because Terraform state
   files are pretty-printed JSON - which is a subset of valid Ion files. The other
   JSON-specific serdes in Athena don't support pretty-printed (multi-line) JSON.
