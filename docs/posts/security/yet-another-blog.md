@@ -1,9 +1,13 @@
 ---
 layout: post
 title:  Yet another blog
-date:   2020-09-25 12:25:52 +1000
-categories: blog
+date:
+  created: 2020-09-25T02:25:52
+categories:
+  - AWS
 ---
+
+<!-- more -->
 
 It's yet another blog. I'm not going to post super often. My Twitter feed is 
 probably more interesting - for a very generous definition of interesting.
