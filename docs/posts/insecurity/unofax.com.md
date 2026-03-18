@@ -3,14 +3,13 @@ layout: post
 title: unofax.com
 date:
   created: 2026-03-18T19:57:00
-draft: true
 categories:
   - SaaS
 ---
 
 I've been writing software for 25 years, and been getting paid for the last 20. 
 My AWS account will be turning 18 this September, and it should be quite the 
-celebration. I don't mean to toot my own horn, but I've got pretty good at writing
+celebration. If I may toot my own horn: I've got pretty good at writing
 and deploying software in that time - to the point that you're actually spending
 your time reading this blog. All this, and the release of Opus 4.5 in November 2025
 hit me like a tonne of bricks. My value-add (as I knew it) would soon be over.
@@ -18,9 +17,9 @@ hit me like a tonne of bricks. My value-add (as I knew it) would soon be over.
 <!-- more -->
 
 Is that a dramatic enough lede? I've also been blogging about software for at 
-least [17 years][first-blog] and I still feel like I'm no good at it. In any case,
-Opus 4.5 was huge. Let me set the scene: after my partner had been using it for 
-a few months, I had finally got around to installing Claude Code in mid-November.
+least [17 years][first-blog] and I still feel like I haven't got the hang of it. 
+In any case, Opus 4.5 was huge. Let me set the scene: after my partner had been 
+using it for a few months, I had finally got around to installing Claude Code in mid-November.
 Opus 4.0 seemed too slow and expensive to use, and Sonnet 4.5 was the default model.
 I gave it a description of a project I wanted to build: a combination of standard
 AWS crud stuff and some more arcane network packet-wrangling and little-used CLI
@@ -56,10 +55,10 @@ entirely using AI.
 
 So that's how we made [unofax.com][unofax]. Payments are received using Square
 (my day job), hosted on AWS Lambda and AWS Step Functions (my favourite tech 
-stack) and the frontend is Vite, I think? We outsource the actual fax-sending
+stack) and the frontend is Vite? We outsource the actual fax-sending
 to another company that does a great job, but requires maintaining a balance 
 to send faxes. So our unique differentiator is that we don't require any sign up
-and you can pay per page. Somehow, we've already made four sales, adding up to
+and you can pay per page. Somehow, we've already made a few sales, adding up to
 a few dollars. That's the most surprising part to me.
 
 Will it allow us to retire? Very unlikely. It serves more as an excuse to learn
