@@ -161,5 +161,5 @@ you might be too. So really, Amazon can't change it now — that would be a
 backwards-incompatible change, and we all know how Amazon feels about those. 
 I'm sure this argument would hold up great in a support ticket.
 
-[access-key-format]: /blog/2020/09/26/aws-access-key-format/
+[access-key-format]: /blog/2020/09/26/aws-access-key-format.html
 [hyrums]: https://www.hyrumslaw.com/
