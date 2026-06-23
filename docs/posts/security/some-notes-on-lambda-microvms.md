@@ -49,7 +49,10 @@ Then you have your network connector, complete with its own lifecycle (i.e. wait
 until it's `ACTIVE`) and ARN. You use that ARN when creating the MicroVM image
 and/or when launching MicroVMs. This provides a nice separation of concerns.
 A network team can create network connectors, and allow developers to only
-use pre-existing connectors. 
+use pre-existing connectors. Note that these connectors will create ENIs in your
+VPC, but **they won't be visible by default** - you need to call 
+`DescribeNetworkInterfaces(IncludeManagedResources=true)` to see them. (I filed
+a false alarm email with AWS security because I didn't know this flag existed, oops)
 
 !!! note "No more shenanigans"
     A note for cheapskates: back in 2021 I learned that you can attach an elastic
