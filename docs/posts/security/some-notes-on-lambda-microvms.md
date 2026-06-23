@@ -104,5 +104,20 @@ of polish. The hardest part will be unlearning some of the architectural lessons
 I've internalised over the years and making the best possible use of what we can
 now do. 
 
+**UPDATE**: Two more tips from [Luc van Donkersgoed][luc]:
+
+**You can connect to your MicroVM on the CLI** using the following commands:
+
+    export MICROVM_ID=microvm-aba894c8-b7c3-3208-bf04-3380189e3af7
+    export TOKEN=$(aws lambda-microvms create-microvm-shell-auth-token --microvm-identifier $MICROVM_ID --expiration-in-minutes 30 | jq -r '.authToken."X-aws-proxy-auth"')
+    (stty raw -echo; websocat --binary --header="X-aws-proxy-auth: $TOKEN" "wss://$(aws lambda-microvms get-microvm --microvm-identifier $MICROVM_ID --query endpoint --output text)"; stty sane)
+
+**When implementing lifecycle hooks**, the port for lifecycle hooks MUST be 
+different than the application port, or the hooks will fail with an opaque 
+'Ready hook invocation timed out after PT1M' error.
+
+Thanks, Luc!
+
 [launch]: https://aws.amazon.com/blogs/aws/run-isolated-sandboxes-with-full-lifecycle-control-aws-lambda-introduces-microvms/
 [lambdaeip]: https://github.com/glassechidna/lambdaeip
+[luc]: https://www.linkedin.com/feed/update/urn:li:activity:7475126067687653376/?dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287475195848142999552%2Curn%3Ali%3Aactivity%3A7475126067687653376%29
