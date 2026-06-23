@@ -13,6 +13,13 @@ things I've discovered about them today.
 
 <!-- more -->
 
+Lambda MicroVMs are well-explained by the above blog post, but I'll quickly explain
+here too for the lazy. MicroVMs are almost a generalisation of Lambda functions,
+or a specialisation of EC2 instances. They're similar to containers, but more 
+isolated, and more powerful (MicroVMs can run containers). You provide some code,
+Lambda will run it in a new VM, within seconds, for up to 8 hours. Use cases include
+CI runners, coding agent hosts, game servers, specialist web servers, etc. 
+
 **You can get a shell in a MicroVM**. When I saw they launched, my first thought was
 "do they have `/dev/ptmx`?" (because Lambda functions don't) - and they do. Not
 only do they allow ptys, it's a first class citizen: you can call the
