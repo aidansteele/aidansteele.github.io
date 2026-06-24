@@ -46,11 +46,14 @@
 .md-typeset {
   line-height: 1.75;
 }
-/* Constrain the prose to a readable measure and centre it. */
-.md-content__inner {
-  max-width: 46rem;
-  margin-left: auto;
-  margin-right: auto;
+/* Constrain the prose to a readable measure and centre it — only on wider
+   screens, so Material keeps its own side gutters on mobile. */
+@media screen and (min-width: 50em) {
+  .md-content__inner {
+    max-width: 46rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 /* Slightly more air between paragraphs. */
 .md-typeset p {
