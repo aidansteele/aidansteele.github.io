@@ -21,7 +21,6 @@ theme:
     - navigation.indexes
 
     - navigation.sections
-    - navigation.tabs
     - navigation.top
     - navigation.tracking
     - search.highlight
@@ -48,8 +47,8 @@ theme:
         icon: material/toggle-switch-off
         name: Switch to system preference
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: IBM Plex Sans
+    code: IBM Plex Mono
 
 # Extensions
 markdown_extensions:
@@ -133,8 +132,9 @@ plugins:
       categories:
         - categories
         - tags
-  - blog: 
+  - blog:
       blog_dir: .
+      draft_on_serve: false
       post_url_format: "blog/{date}/{file}"
       pagination: true
       post_date_format: medium
