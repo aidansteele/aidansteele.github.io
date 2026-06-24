@@ -42,6 +42,36 @@
   color: #eceef2;
 }
 
+/* --- Stay fluid: never force horizontal overflow -------------------------- */
+/* Let flex containers shrink below their content so children wrap/scroll
+   instead of widening the page. */
+.md-main__inner,
+.md-content,
+.md-content__inner,
+.md-post,
+.md-post__content {
+  min-width: 0;
+}
+/* The byline is a flex row — let it wrap rather than push the page wide. */
+.md-post__meta .md-meta__list {
+  flex-wrap: wrap;
+}
+/* Long words, URLs and titles break instead of overflowing. */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset p,
+.md-typeset li,
+.md-post__content h2 {
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.md-typeset img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* --- Reading comfort ------------------------------------------------------ */
 .md-typeset {
   line-height: 1.75;
@@ -222,6 +252,17 @@
 .md-header__topic > .md-ellipsis {
   font-weight: 400;
   letter-spacing: 0.005em;
+}
+
+/* The site title links home, but reads as a wordmark — inherit the header ink,
+   no underline, just a subtle hover cue. */
+.md-header__title-link {
+  color: inherit;
+}
+.md-header__title-link:hover,
+.md-header__title-link:focus {
+  color: inherit;
+  opacity: 0.7;
 }
 
 /* Flatten the header into a thin-ruled band rather than a heavy bar. */
