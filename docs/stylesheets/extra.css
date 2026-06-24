@@ -82,13 +82,20 @@
 .md-typeset {
   line-height: 1.75;
 }
+/* Hide the table-of-contents sidebar whenever it has no entries (e.g. the blog
+   index) — an empty rail just reserves space and unbalances the layout,
+   especially on tablet-width screens. */
+.md-sidebar--secondary:not(:has(.md-nav__link)) {
+  display: none;
+}
 /* Constrain the prose to a readable measure and centre it — only on wider
-   screens, so Material keeps its own side gutters on mobile. */
+   screens, so Material keeps its own side gutters on mobile. The !important
+   overrides Material's higher-specificity sidebar-adjacent margin rules. */
 @media screen and (min-width: 50em) {
-  .md-content__inner {
+  .md-content > .md-content__inner {
     max-width: 46rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 /* Slightly more air between paragraphs. */
