@@ -9,6 +9,7 @@ site_author: Aidan W. Steele
 # Configuration
 theme:
   name: material
+  custom_dir: overrides
   features:
     - announce.dismiss
     - content.action.edit
@@ -114,6 +115,9 @@ extra:
 extra_css:
   - stylesheets/extra.css
 use_directory_urls: false
+
+hooks:
+  - hooks/og_image.py
 
 plugins:
   - rss:
