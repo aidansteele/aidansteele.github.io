@@ -41,6 +41,12 @@
 [data-md-color-scheme="slate"] .md-typeset h3 {
   color: #eceef2;
 }
+/* In light mode, headings are pure black rather than Material's muted grey. */
+[data-md-color-scheme="default"] .md-typeset h1,
+[data-md-color-scheme="default"] .md-typeset h2,
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #000;
+}
 
 /* --- Stay fluid: never force horizontal overflow -------------------------- */
 /* Let flex containers shrink below their content so children wrap/scroll
