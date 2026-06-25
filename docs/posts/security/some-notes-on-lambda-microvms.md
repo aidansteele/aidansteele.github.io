@@ -67,13 +67,22 @@ I provide a Dockerfile inside a ZIP file and store it in S3? Why not let me
 just upload a Docker image? It becomes clear once you create your first image:
 Lambda actually creates two copies of the image, one for Graviton 3 and one for
 Graviton 4. By asking us to upload the "source" Dockerfile and code, they can
-recompile on-demand.
+recompile on-demand. **NOTE**: Some of the [docs][ecr-doc] suggest you can specify
+an ECR image, but that's not true - it has to be a Dockerfile in a ZIP on S3.
+It's fine though, because your Dockerfile can just do `FROM ...` whatever image
+you wanted to reference.
 
 **MicroVMs have the equivalent of "Lambda SnapStart"**. Specifically, AWS launches
 the image during the build process and takes a snapshot of memory/disk. This
 snapshot is then used to launch new MicroVMs. You'll probably want to take
 advantage of the lifecycle hooks to reinitialise sources of randomness upon
 MicroVM creation. 
+
+**Note the relevant [limits][limits]**. The Lambda team is pretty good about
+documenting all the relevant limits you might want to know about. The only one
+that is missing (at the time of writing) is the maximum image size. The machine
+that builds your MicroVM images seems to only have ~7.2GB of free disk space.
+Your images might not be that big, but it's worth noting.
 
 **Environment variables are different to Lambda functions**. Lambda functions
 have a wide range of environment variables by default ([earlier post][lambda-extension-env-vars])
@@ -88,9 +97,19 @@ image version. Here is the set of env vars populated by default:
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     HOME=/root
 
-Annoyingly, there appears to be no way to identify which MicroVM your code is
-running inside from either the env vars, metadata service or even STS web
-identity federation token.
+You can identify which MicroVM you're running on from the contents of the `run`
+hook (but note the caveat in the next section). The contents look like this:
+
+```json
+{
+  "microvmId":"microvm-787b4c09-...",
+  "runHookPayload":"hello-from-run-hook-12345"
+}
+```
+
+**Lifecycle hooks are only delivered on port 9000**, regardless of the port you 
+configure. This is probably a bug that will be fixed soon, but it's worth noting
+if you are an early adopter and value your sanity.
 
 **Inbound connectivity to MicroVMs is always authenticated**, using bearer tokens.
 Connectivity is supported using HTTP/1.1, HTTP/2, gRPC, websockets and server-sent
@@ -124,7 +143,7 @@ of polish. The hardest part will be unlearning some of the architectural lessons
 I've internalised over the years and making the best possible use of what we can
 now do. 
 
-**UPDATE**: Two more tips from [Luc van Donkersgoed][luc]:
+**UPDATE**: A tip from [Luc van Donkersgoed][luc]:
 
 **You can connect to your MicroVM on the CLI** using the following commands:
 
@@ -132,13 +151,11 @@ now do.
     export TOKEN=$(aws lambda-microvms create-microvm-shell-auth-token --microvm-identifier $MICROVM_ID --expiration-in-minutes 30 | jq -r '.authToken."X-aws-proxy-auth"')
     (stty raw -echo; websocat --binary --header="X-aws-proxy-auth: $TOKEN" "wss://$(aws lambda-microvms get-microvm --microvm-identifier $MICROVM_ID --query endpoint --output text)"; stty sane)
 
-**When implementing lifecycle hooks**, the port for lifecycle hooks MUST be 
-different than the application port, or the hooks will fail with an opaque 
-'Ready hook invocation timed out after PT1M' error.
-
 Thanks, Luc!
 
 [launch]: https://aws.amazon.com/blogs/aws/run-isolated-sandboxes-with-full-lifecycle-control-aws-lambda-introduces-microvms/
 [lambda-extension-env-vars]: /blog/2022/12/15/lambda-extension-environment-variables.html
 [lambdaeip]: https://github.com/glassechidna/lambdaeip
 [luc]: https://www.linkedin.com/feed/update/urn:li:activity:7475126067687653376/?dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287475195848142999552%2Curn%3Ali%3Aactivity%3A7475126067687653376%29
+[ecr-doc]: https://docs.aws.amazon.com/lambda/latest/microvm-api/API_CodeArtifact.html
+[limits]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#microvms-quotas
