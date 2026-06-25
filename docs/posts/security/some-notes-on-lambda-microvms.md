@@ -75,6 +75,23 @@ snapshot is then used to launch new MicroVMs. You'll probably want to take
 advantage of the lifecycle hooks to reinitialise sources of randomness upon
 MicroVM creation. 
 
+**Environment variables are different to Lambda functions**. Lambda functions
+have a wide range of environment variables by default ([earlier post][lambda-extension-env-vars])
+and updating the env vars on a function is a quick affair. MicroVMs,
+on the other hand, have far fewer, and updating env vars requires building a new
+image version. Here is the set of env vars populated by default:
+
+    AWS_LAMBDA_MICROVM_IMAGE_VERSION=1.0
+    AWS_LAMBDA_MICROVM_IMAGE_NAME=your-image
+    AWS_LAMBDA_MICROVM_IMAGE_ARN=arn:aws:lambda:us-east-1:607481581596:microvm-image:your-image
+    AWS_REGION=us-east-1
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    HOME=/root
+
+Annoyingly, there appears to be no way to identify which MicroVM your code is
+running inside from either the env vars, metadata service or even STS web
+identity federation token.
+
 **Inbound connectivity to MicroVMs is always authenticated**, using bearer tokens.
 Connectivity is supported using HTTP/1.1, HTTP/2, gRPC, websockets and server-sent
 events. You need to provide an `X-aws-proxy-auth` header. The value for that 
@@ -122,5 +139,6 @@ different than the application port, or the hooks will fail with an opaque
 Thanks, Luc!
 
 [launch]: https://aws.amazon.com/blogs/aws/run-isolated-sandboxes-with-full-lifecycle-control-aws-lambda-introduces-microvms/
+[lambda-extension-env-vars]: /blog/2022/12/15/lambda-extension-environment-variables.html
 [lambdaeip]: https://github.com/glassechidna/lambdaeip
 [luc]: https://www.linkedin.com/feed/update/urn:li:activity:7475126067687653376/?dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287475195848142999552%2Curn%3Ali%3Aactivity%3A7475126067687653376%29
