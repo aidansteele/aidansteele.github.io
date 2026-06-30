@@ -10,6 +10,8 @@ site_author: Aidan W. Steele
 theme:
   name: material
   custom_dir: overrides
+  logo: assets/logo.png
+  favicon: assets/favicon.png
   features:
     - announce.dismiss
     - content.action.edit
