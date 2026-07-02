@@ -259,6 +259,16 @@
   border: none;
 }
 
+/* --- Admonitions / callouts: even breathing room top and bottom ----------- */
+/* Material gives the body's last child a .6rem bottom margin, but the custom
+   paragraph rule above strips top margins — so the first line hugs the title
+   bar while the last floats above the lower border. Mirror the spacing so the
+   content sits evenly inset. */
+.md-typeset .admonition-title + *,
+.md-typeset summary + * {
+  margin-top: 0.6rem;
+}
+
 /* --- Quieter chrome ------------------------------------------------------- */
 /* Zen header: the title reads as a calm wordmark, not a bold banner. */
 .md-header__title,
