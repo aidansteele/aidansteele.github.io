@@ -6,8 +6,8 @@
 
   - og:description uses the post's `description` front-matter, falling back to
     the post title when the post has no description.
-  - og:image uses the post's first image (set by hooks/og_image.py), falling
-    back to a default avatar when the post has no image.
+  - twitter:image uses the post's first image (set by hooks/og_image.py),
+    falling back to a default avatar when the post has no image.
 #}
 {% block extrahead %}
   {{ super() }}
@@ -19,7 +19,6 @@
   <meta property="og:description" content="{{ og_description | e }}">
   {% if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url | e }}">{% endif %}
   <meta property="og:site_name" content="{{ config.site_name | e }}">
-  <meta property="og:image" content="{{ og_image | e }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ og_title | e }}">
   <meta name="twitter:description" content="{{ og_description | e }}">
