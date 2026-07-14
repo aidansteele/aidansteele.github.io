@@ -3,7 +3,7 @@ MkDocs hook: expose each post's first image as `page.meta.og_image`, resolved
 to an absolute URL, for use as the OpenGraph / Twitter Card image.
 
 Posts that contain no image leave `og_image` unset; the theme override then
-falls back to a default avatar.
+omits the image meta tags entirely.
 """
 import re
 from urllib.parse import urljoin

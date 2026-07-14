@@ -6,21 +6,22 @@
 
   - og:description uses the post's `description` front-matter, falling back to
     the post title when the post has no description.
-  - twitter:image uses the post's first image (set by hooks/og_image.py),
-    falling back to a default avatar when the post has no image.
+  - og:image uses the post's first image (set by hooks/og_image.py). Posts
+    with no image omit the image tags entirely.
 #}
 {% block extrahead %}
   {{ super() }}
   {% set og_title = (page.title if page else none) | default(config.site_name, true) %}
   {% set og_description = (page.meta.description if page and page.meta else none) | default(og_title, true) %}
-  {% set og_image = (page.meta.og_image if page else none) | default(config.site_url ~ 'assets/og-default.png', true) %}
+  {% set og_image = page.meta.og_image if page and page.meta else none %}
   <meta property="og:type" content="article">
   <meta property="og:title" content="{{ og_title | e }}">
   <meta property="og:description" content="{{ og_description | e }}">
   {% if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url | e }}">{% endif %}
   <meta property="og:site_name" content="{{ config.site_name | e }}">
-  <meta name="twitter:card" content="summary_large_image">
+  {% if og_image %}<meta property="og:image" content="{{ og_image | e }}">{% endif %}
+  <meta name="twitter:card" content="{{ 'summary_large_image' if og_image else 'summary' }}">
   <meta name="twitter:title" content="{{ og_title | e }}">
   <meta name="twitter:description" content="{{ og_description | e }}">
-  <meta name="twitter:image" content="{{ og_image | e }}">
+  {% if og_image %}<meta name="twitter:image" content="{{ og_image | e }}">{% endif %}
 {% endblock %}
