@@ -7,6 +7,12 @@ categories:
   - AWS
 ---
 
+**tl;dr**: Search CloudTrail for instances of `AssumeRole` with 
+`additionalEventData.explicitTrustGrant == false`. These will yield results
+for role assumptions that **aren't** permitted by the trust policy, i.e. the
+ones that are going to surprise you - and violate your invariants like "role 
+session names will always be an employee's email address".
+
 <!-- more -->
 
 ## Update (14 March, 2024)
@@ -16,14 +22,6 @@ feedback and the situation has improved. `explicitTrustGrant` is now
 [documented][iam-docs] and appears on Google. I've also updated my quotes from 
 Arkadiy's article to reflect his changes. I continue to be impressed by Amazon's
 responsiveness to feedback published on some random personal blogs.
-
-## tl;dr
-
-Search CloudTrail for instances of `AssumeRole` with 
-`additionalEventData.explicitTrustGrant == false`. These will yield results
-for role assumptions that **aren't** permitted by the trust policy, i.e. the
-ones that are going to surprise you - and violate your invariants like "role 
-session names will always be an employee's email address".
 
 ## Not quite invariant
 

@@ -7,14 +7,12 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
-## Update
-
-In April 2022, AWS released `aws:ResourceOrgID` (and a couple of other related
+**Update**: In April 2022, AWS released `aws:ResourceOrgID` (and a couple of other related
 condition keys). This [blog post][launch-post] does a great job of describing 
 how it works. I'll leave the rest of this blog post in place for historical
 interest, but it's now outdated.
+
+<!-- more -->
 
 ## Background
 

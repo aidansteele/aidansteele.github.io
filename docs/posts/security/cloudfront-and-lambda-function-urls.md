@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 In April 2022, AWS Lambda [announced the launch of function URLs][aws-blog] - a
 way to invoke websites powered by Lambda functions without needing API Gateway.
 A common complaint was the lack of support for custom domains: it only supported
@@ -16,6 +14,9 @@ the URLs it would generate that look like `lprqaxgvt4f6ab3dbj3ixftr640uzgie.lamb
 
 But that's where CloudFront comes in useful. Not only can it provide us with 
 custom domain functionality, but we get caching, WAF support, etc as well.
+
+<!-- more -->
+
 Here's a template I've been using for my apps:
 
 ```yaml

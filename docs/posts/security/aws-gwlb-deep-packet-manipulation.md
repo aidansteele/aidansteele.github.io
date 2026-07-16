@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 AWS [introduced Gateway Load Balancers][intro-blog] back in November 2020. A
 reasonably accurate tl;dr would be that they are like having highly available, 
 auto-scaling NAT instances. That intro blog post will explain them better than
@@ -17,6 +15,8 @@ I can.
 The blog post mentions a dozen AWS partners that implement various flavours of
 firewalls, deep packet inspection, DDoS protection, etc. It's all useful and
 serves a genuine need, but not very exciting from a developer perspective. 
+
+<!-- more -->
 
 There's been a real dearth of community blog posts about it in the subsequent 
 years. There's the [GeneveProxy][sentia] post by Luc van Donkersgoed, which does

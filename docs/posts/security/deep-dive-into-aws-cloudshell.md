@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 AWS CloudShell got a [new capability][whats-new] in January 2024: running Docker 
 containers. This piqued my curiosity because Docker-in-Docker usually implies
 privileged containers, and I have previously used that to [escape CodeBuild][codebuild]
@@ -17,6 +15,8 @@ CloudShell - and how its AWS credential system worked (the environment inherits
 the user's credentials, unlike CodeBuild). The short answer is "it can be done", 
 and this post goes into a) how to do it and b) documenting what I could learn 
 about the inner workings of CloudShell.
+
+<!-- more -->
 
 ## Container escape
 

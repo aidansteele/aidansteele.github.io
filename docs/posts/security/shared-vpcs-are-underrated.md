@@ -7,11 +7,11 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 AWS [launched VPC sharing][launch-blog] in January 2019, two years ago. It feels
 to me that there hasn't been much chatter about it since then. Which is a shame,
 because I suspect they are quite useful. I'm going to focus on cost and security.
+
+<!-- more -->
 
 Recommended practice nowadays is to have a "multi-account strategy" in AWS. You
 typically have an account per [app, environment]. So if you have three apps and

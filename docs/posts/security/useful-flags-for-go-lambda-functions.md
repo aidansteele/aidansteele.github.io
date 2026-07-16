@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 Last week AWS published a [blog post][aws-blog] advising that the `go1.x` Lambda
 runtime will be deprecated and people should migrate to `provided.al2`. I was 
 already using the newer runtime, but I also learned from the blog post that AWS
@@ -20,6 +18,8 @@ my Lambda packages were now twice the size. This means slower cold starts and
 slower deployments - especially from my laptop in Australia. I also noticed that 
 my CI pipelines were slower because every commit was causing Lambda updates, even
 when no code had changed. 
+
+<!-- more -->
 
 The cause of all these issues was the set of build-time flags. My Makefile was
 setting them, but the AWS SAM builder [defaults][builder-flags] to no flags. The

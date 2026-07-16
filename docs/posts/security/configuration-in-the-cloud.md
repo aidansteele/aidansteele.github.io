@@ -7,13 +7,13 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 A couple of days ago, [_Announcing AWS Parameters and Secrets Lambda Extension_][aws-blog]
 appeared on the AWS What's New site. The general thrust of the motivation behind 
 this (providing an easier way to vend credentials securely to AWS Lambda functions)
 is something that's absolutely needed, but I'm not sure that this approach will
 move the needle - and it confuses me.
+
+<!-- more -->
 
 My confusion stems from how different an approach this is to how AWS ECS does it.
 In June 2019, [AWS ECS released support][ecs-blog] for specifying secret values 

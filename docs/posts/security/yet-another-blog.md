@@ -7,10 +7,10 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 It's yet another blog. I'm not going to post super often. My Twitter feed is 
 probably more interesting - for a very generous definition of interesting.
+
+<!-- more -->
 
 Do code blocks work?
 

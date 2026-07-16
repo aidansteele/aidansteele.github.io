@@ -7,12 +7,12 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 A few years ago, I [wrote][akia-blog] about determining AWS account IDs from AWS 
 access keys, i.e. those strings that begin with `AKIA` or `ASIA`. It's also 
 possible to determine information from other AWS IAM unique IDs, specifically 
 these two from the table in [Amazon's docs][docs].
+
+<!-- more -->
 
 ![screenshot](/assets/2023-11-20-docs-table.png)
 

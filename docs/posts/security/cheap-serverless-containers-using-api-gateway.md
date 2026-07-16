@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 Sometimes I need to run a long-lived app. In those cases I reach for AWS ECS
 Fargate instead of AWS Lambda. You can run a container on Fargate for as little 
 as $9/month, or $2.70/month if you're happy to roll the dice with Fargate Spot
@@ -18,6 +16,8 @@ If you have a web app, you almost certainly use a load balancer in front of your
 containers. And this is where the cost goes from "fun side project" to "oh, I'm
 not sure I'm willing to spend _that_ much money on this." The load balancer by 
 itself is at least $16.40/month - you could run six containers for that price!
+
+<!-- more -->
 
 ## No need for load balancers
 

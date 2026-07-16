@@ -7,11 +7,13 @@ categories:
   - AWS
 ---
 
+Say you find yourself doing silly things with AWS APIs on a lazy Sunday
+afternoon. And you are getting an inexplicable error when using
+perfectly valid credentials.
+
 <!-- more -->
 
-Say you find yourself doing silly things with AWS APIs on a lazy Sunday
-afternoon. And you are getting the following inexplicable error when using
-perfectly valid credentials:
+The error looks like this:
 
 ```xml
 <Error>

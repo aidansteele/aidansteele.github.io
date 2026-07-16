@@ -9,14 +9,14 @@ categories:
   - GitHub
 ---
 
-<!-- more -->
-
 Back in 2021, I [requested][my-blog] that AWS add some kind of "claim-to-tag mapping"
 functionality to OIDC IDPs, so that we could have role session tags based on 
 claims in OIDC tokens issued by GitHub Actions. That hasn't happened yet, but
 today I learned (thanks to [this comment][comment] and associated [blog post][orig-blog]
 by Daniel Jonsén) that the same outcome can be achieved by using AWS Cognito 
 identity pools as an intermediary.
+
+<!-- more -->
 
 Cognito identity pools has [functionality][cognito-docs] that allows claims in
 an OIDC token to be mapped to role session tags. On a simple level: once you've 

@@ -7,12 +7,12 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 AWS Lambda has supported [function versions][versioning] since October 2015, only
 a couple of months after the service itself was publicly launched. Versions are
 an optional feature - you can develop and use Lambda functions without versioning,
 in which case you are working with the implicit `$LATEST` version. 
+
+<!-- more -->
 
 It has been my experience that most developers don't use function versions. Some
 "evidence" of this is:

@@ -7,11 +7,11 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 What's the silliest use for 281 trillion IP addresses that you can think of?
 That's the question I asked myself when AWS [launched support][blog] for assigning 
 IPv6 prefixes to EC2 instances. 
+
+<!-- more -->
 
 The IPv6 prefixes are `/80`, which gives your EC2 instance 281,474,976,710,656 
 IP addresses to play with. You _could_ use the feature to run 281 trillion containers 

@@ -7,14 +7,14 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 **tl;dr: You can now pass an IAM role to every EC2 instance in your account + region.**
 
 On Feb 17th 2023, AWS Systems Manager released [Default Host Management Configuration][dhmc].
 This is a way to use Systems Manager on all your EC2 instances: they don't need 
 `ssm:*` permissions in their instance profiles, nor do they even need an instance
 profile at all.
+
+<!-- more -->
 
 So how does it work?
 

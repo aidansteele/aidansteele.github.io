@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 **UPDATE**: This issue has been fixed. See the end of the article for timeline
 and details.
 
@@ -17,6 +15,8 @@ blog. The tl;dr is that "escaping" a privileged container running in an Amazon-m
 AWS account isn't a security concern for Amazon, thanks to defence-in-depth on
 both an EC2 and IAM level. Here's a few paragraphs I left out of that blog post
 at the time.
+
+<!-- more -->
 
 ## But wait, there's more
 

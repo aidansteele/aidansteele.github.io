@@ -9,14 +9,14 @@ categories:
   - GitHub
 ---
 
-<!-- more -->
-
 GitHub Actions has supported using OIDC tokens for about 15 months now. It is
 a much better way of providing AWS credentials to workflows than creating IAM users
 and storing long-lived access keys in GitHub Actions secrets.
 
 One issue holding back larger organisations from adopting this solution is the
 lack of useful granular controls. I touched on this in an earlier article [_AWS IAM OIDC IDPs need more controls_][earlier].
+
+<!-- more -->
 
 I've since seen a new section pop up in the GitHub docs: [_Switching to a unique token URL_][docs].
 It was actually [announced][announcement] back in August 2022 but I either didn't 

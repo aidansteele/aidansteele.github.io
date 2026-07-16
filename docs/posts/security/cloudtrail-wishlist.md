@@ -7,13 +7,13 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 **UPDATE**: My dream came true - almost. See follow-up [post][follow-up].
 
 AWS re:Invent 2024 is fast approaching and there's usually a flurry of exciting
 new services and features for existing services launched around this time each
 year. I'll be there in person this year - come say hello if you are too!
+
+<!-- more -->
 
 AWS CloudTrail is one of the services I rely on most. I probably run SQL queries
 against CloudTrail events at least ten times a week. It's useful for so much 

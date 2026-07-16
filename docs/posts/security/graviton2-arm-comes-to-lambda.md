@@ -7,11 +7,11 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 Today, Amazon Web Services has unveiled [_AWS Lambda Functions Powered By AWS Graviton2 Processors_][release-link], 
 offering a 20% reduction in the GB-second price compared to their x86-powered
 cousins. But first, some short history.
+
+<!-- more -->
 
 ## History
 

@@ -7,14 +7,14 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
-## Experimentation
-
 I was thinking about AWS access key IDs yesterday. Specifically, the one that's
 often in the `AWS_ACCESS_KEY_ID` environment variable, or `aws_access_key_id`
 in `~/.aws/credentials`. I was trawling through CloudTrail and the repetitive
 nature of them caught my eye.
+
+<!-- more -->
+
+## Experimentation
 
 Here's an example key we'll refer to for this example: `ASIAY34FZKBOKMUTVV7A`.
 Firstly, the format of the first four characters is actually [documented][docs] and

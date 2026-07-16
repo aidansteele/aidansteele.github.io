@@ -7,11 +7,11 @@ categories:
   - AWS
 ---
 
-<!-- more -->
+Here are the environment variables available to an AWS Lambda **extension** in
+the `provided.al2` runtime. This is really just some context for myself so I
+don't have to write code to sanity-check myself each time.
 
-This is really just some context for myself so I don't have to write code to
-sanity-check myself each time. Here are the environment variables available to
-an AWS Lambda **extension** in the `provided.al2` runtime:
+<!-- more -->
 
 | Name                            | Value                                                        |
 | ------------------------------- | ------------------------------------------------------------ |

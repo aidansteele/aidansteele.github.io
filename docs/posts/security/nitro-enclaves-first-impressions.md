@@ -7,9 +7,9 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 At the end of October, AWS [released][nitro-blog] Nitro Enclaves. My mental model of these is essentially a *secure* virtual machine within a virtual machine - the outer VM being an EC2 instance. The *secure* qualifier is to distinguish that the inner VM has many restrictions: by default it has no network access, no persistent disk, no access to processes running on the host and crucially, vice-versa: the host likewise doesn't have access to resources inside the enclave. All communication instead happens over [`vsock`][vsock] sockets.
+
+<!-- more -->
 
 This is all pretty cool, but what really piqued my interest is the integrations that enclaves have with AWS KMS cryptography and AWS-certified attestations of enclave identity and integrity. In other words, you can write AWS [KMS key policies][kms-policies] that ensure that only signed and unmodified code can decrypt or encrypt particular data. It also means that code running in an enclave can *attest* (prove) to third parties that it is running on a particular EC2 instance and that the code has not been tampered with.
 

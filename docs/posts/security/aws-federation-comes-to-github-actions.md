@@ -9,8 +9,6 @@ categories:
   - GitHub
 ---
 
-<!-- more -->
-
 **At the time of writing, this functionality exists but has yet to be announced
 or documented. It works, though!**
 
@@ -19,7 +17,11 @@ or documented. It works, though!**
 GitHub Actions has new functionality that can vend OpenID Connect credentials
 to jobs running on the platform. This is very exciting for AWS account
 administrators as it means that CI/CD jobs no longer need **any** long-term
-secrets to be stored in GitHub. But enough of that, here's how it works:
+secrets to be stored in GitHub.
+
+<!-- more -->
+
+But enough of that, here's how it works:
 
 First, an AWS IAM OIDC identity provider and an AWS IAM role that GitHub Actions
 can assume. You can do that by deploying this CloudFormation template to your 

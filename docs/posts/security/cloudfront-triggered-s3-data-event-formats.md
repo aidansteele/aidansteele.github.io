@@ -7,12 +7,14 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 There are several ways that CloudFront can be configured with an S3 origin. There
 are functionality differences between them, but the focus in this blog post is
 how activity is represented in CloudTrail, specifically the differences in S3
-data-level events for each CloudFront option. Those options in CloudFront are 
+data-level events for each CloudFront option.
+
+<!-- more -->
+
+Those options in CloudFront are 
 (in decreasing order of desirability):
 
 1. S3 origin with an Origin Access Control (OAC) configuration. OACs were launched

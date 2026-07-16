@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 This article has been in my drafts for 380 days. It's probably time I published it,
 before I forget even more details about how it works. ~A few~ 380+ days ago, I 
 published [ima.ge.cx][imagecx]. It's a web frontend for browsing the contents 
@@ -16,6 +14,8 @@ of Docker images. It's like a less powerful version of [`dive`][dive] that
 doesn't require you to pull images locally. It's also worth noting that there's
 a much more feature-rich (and likely less buggy) site that does a similar thing:
 [Registry Explorer][reg-explorer].
+
+<!-- more -->
 
 I planned on cleaning up the code significantly before publishing (I can't have
 anyone see how the sausage is made), but in the year since writing it I have lost

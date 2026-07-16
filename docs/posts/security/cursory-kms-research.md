@@ -7,13 +7,13 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 A couple of months ago, Thai Duong wrote an [interesting post][proj-zero] about
 problems with the AWS Encryption SDK. Most of it goes way over my head, but my
 curiosity was piqued by the mention of reverse-engineering the format of the
 "ciphertext" returned by KMS [`Encrypt`][encrypt]. There wasn't much detail on
 that (it wasn't the primary topic) so I thought I'd do some digging into it.
+
+<!-- more -->
 
 I haven't dug into this too much, but I thought I'd share what I have so far
 as I've yet to find *any* other resources on this. My hope is that someone else

@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 The [CloudWatch embedded metric format (EMF)][emf-spec] is a convenient way to
 publish metrics to CloudWatch from your apps running in AWS - especially Lambda
 functions. You just need to emit logs in the right JSON format and CloudWatch _Logs_
@@ -20,6 +18,8 @@ Amazon advises that you instead do not create _dimensions_ and instead treat the
 metrics as logs and query them using CloudWatch Log Insights. So you have to make 
 a trade-off between something useful, something affordable and something easy to 
 use. 
+
+<!-- more -->
 
 Or you could use [Honeycomb][honeycomb]! Honeycomb doesn't make you decide in
 advance which properties (or combination of properties) would be useful dimensions.

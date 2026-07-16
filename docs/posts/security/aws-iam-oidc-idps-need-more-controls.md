@@ -9,14 +9,14 @@ categories:
   - GitHub
 ---
 
-<!-- more -->
-
-## Background primer
-
 In my post [_AWS federation comes to GitHub Actions_][previous-post] I wrote about 
 GitHub Actions' new ability to federate access into AWS (and other clouds) via
 OpenID Connect. This is really great, much better than the prior state of affairs,
 but needs improvement on the AWS side.
+
+<!-- more -->
+
+## Background primer
 
 Today, AWS IAM OIDC identity providers have a few configuration options:
 

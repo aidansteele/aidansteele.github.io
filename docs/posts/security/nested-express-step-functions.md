@@ -7,13 +7,15 @@ categories:
   - AWS
 ---
 
+AWS Step Functions are cool. Express Step Functions have always felt like they
+had the _potential_ to be cool, but were missing some key features when they
+launched. I think they're worth revisiting in light of recent releases.
+
 <!-- more -->
 
 ## History
 
-AWS Step Functions are cool. Express Step Functions have always felt like they
-had the _potential_ to be cool, but were missing some key features when they
-launched. I think they're worth revisiting in light of recent releases. A timeline:
+A timeline:
 
 * December 2019: [Express workflows launched][launch]. 
 

@@ -7,13 +7,13 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 Back in November last year, I [wished][prev-blog] for the ability to filter 
 CloudTrail data events by the requesting principal's ARN. Two days later, my wish
 was almost granted: CloudTrail launched the ability to filter on `userIdentity.arn`
 for CloudTrail _lakes_ but not _trails_. And now it seems my wish has almost
 completely come true: the functionality has rolled out to trails as well.
+
+<!-- more -->
 
 I say "almost" because it comes with a few caveats. I wished for a way to filter
 on the principal's ARN, i.e. the field at `userIdentity.sessionContext.sessionIssuer.arn`.

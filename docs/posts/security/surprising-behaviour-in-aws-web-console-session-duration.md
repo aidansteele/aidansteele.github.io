@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 Credentials for AWS IAM role sessions are short-lived. By default, they last for
 one hour. When calling `AssumeRole` you can request a different duration by 
 passing a value between `900` (15 minutes) and `43200` (12 hours) in the 
@@ -24,8 +22,11 @@ endpoints (`GetSigninToken`) allows you to pass an optional `SessionDuration`
 parameter. This acts as you might expect: it defines how long the web console
 session will remain valid. What surprised me: **you can start a 12 hour web
 console session for a role that has a max session duration of 1 hour**. The web
-console session will outlive the credentials that were used to create it. The
-closest I could find to documentation of this behaviour is this line:
+console session will outlive the credentials that were used to create it.
+
+<!-- more -->
+
+The closest I could find to documentation of this behaviour is this line:
 
 > The ability to create a console session that is longer than one hour is 
 > intrinsic to the `getSigninToken` operation of the federation endpoint.

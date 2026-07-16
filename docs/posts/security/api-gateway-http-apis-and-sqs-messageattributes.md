@@ -7,13 +7,13 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 A while ago [I asked on Twitter][tweet] if anyone knew how to knew how to set
 message attributes when using AWS API Gateway (HTTP API flavour)'s integration
 for `SQS-SendMessage`. I didn't get very far.
 
 But today that changed! Here is how you do it. Hopefully this helps someone else.
+
+<!-- more -->
 
 ```yaml
 Resources:

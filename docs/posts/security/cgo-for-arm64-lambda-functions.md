@@ -7,12 +7,12 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 In my post [_Graviton2: ARM comes to Lambda_][first-post] I showed that it is
 very easy to cross-compile Go code to run on ARM64 AWS Lambda functions. That's
 true as long as your code is 100% Go - as soon as there's any C code involved
 it feels impossible. I mean, who wants to deal with this error message?
+
+<!-- more -->
 
 ![cgo error message](/assets/2021-10-18-error-message.png)
 

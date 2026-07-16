@@ -7,8 +7,6 @@ categories:
   - AWS
 ---
 
-<!-- more -->
-
 It's long been considered "best practice" to avoid having IAM _users_ in AWS.
 Where possible IAM _roles_ are preferable as role session credentials are 
 short-lived. As far as I can tell, the only justification for AWS IAM users that 
@@ -18,6 +16,8 @@ won't work), e.g. a Raspberry Pi in your closet.
 I created a proof-of-concept project [`cloudkey`][github] to show that even that 
 scenario can avoid IAM users. It uses the little-known [`iot:AssumeRoleWithCertificate`][aws-blog]
 functionality to avoid that.
+
+<!-- more -->
 
 Specifically, it uses the "card authentication" slot on a Yubikey to store a TLS
 certificate and private key. This slot can be used to sign requests without a PIN
