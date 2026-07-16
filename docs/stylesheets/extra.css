@@ -250,7 +250,6 @@
 .md-typeset pre > code {
   padding: 0.9em 1.05em;
 }
-.md-typeset .highlight,
 .md-typeset pre {
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: 8px;
