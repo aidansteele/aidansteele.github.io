@@ -93,6 +93,7 @@
    overrides Material's higher-specificity sidebar-adjacent margin rules. */
 @media screen and (min-width: 50em) {
   .md-content > .md-content__inner {
+    width: calc(100% - 1.6rem);
     max-width: 46rem;
     margin-left: auto !important;
     margin-right: auto !important;
