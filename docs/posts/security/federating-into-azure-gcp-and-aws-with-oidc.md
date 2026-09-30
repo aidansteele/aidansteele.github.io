@@ -59,12 +59,19 @@ to create some (free) buckets. Empty buckets are fine.
 
 ## Azure specifics
 
-I'm still wrapping my head around Azure. There appear to be a couple of different
-ways to do OIDC federation. One is directly configured on a "user-assigned managed
-identity", which seems like the equivalent of an IAM role? The other is to create
+There are a couple of different ways to do OIDC federation. One is to create
 an application in Entra ID (which itself seems more of a sibling to Azure than an
 Azure service itself), configure OIDC on that application, and then assign that
-application roles in Azure subscriptions. 
+application roles in Azure subscriptions. This is the way to do it.
+
+The other is OIDC directly configured on a "user-assigned managed identity", which 
+seems like the equivalent of an IAM role. Luke Young got in touch and discouraged
+this approach. You can't apply conditional access policies (e.g. IP restrictions)
+to managed identities, and they are (weirdly) tied to a specific Azure region
+rather than being global. An Entra ID application also has more configuration
+knobs and can be granted Entra ID permissions directly, instead of hackily via
+the service principal. The sample code in `cloudfed` uses the Entra ID application
+approach. Thanks, Luke!
 
 It's worth noting (especially if you're mostly an AWS person, like me) that these
 "roles" are like permissions in AWS, and they can be assigned at relatively 
@@ -77,8 +84,13 @@ lower resource-based levels, too.
 
     The role assignment resource is `azurerm_role_assignment` and the `azurerm`
     provider needs to be configured with a subscription, but if you specify a management
-    group scope, does the resource really belong to a subscription? Stay tuned while I
-    figure that out (or get in touch and explain it to me, please)
+    group scope, does the resource really belong to a subscription? 
+
+    **Update**: Luke answered this one too. The provider needs a subscription to
+    initialise without errors, but the role assignment isn't created under that
+    subscription: look at the actual resource or the ID returned by Terraform and
+    you'll see it lives under the management group. It's a lot like how the GCP
+    provider wants a project but can still create organization-level resources.
 
 ## GCP specifics
 
