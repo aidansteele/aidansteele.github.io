@@ -147,3 +147,4 @@ that feels like a shame to me.
 [launch]: https://aws.amazon.com/blogs/aws/announcing-aws-lambda-web-functions-for-fast-consistent-web-app-performance-anywhere/
 [main-post]: /blog/2026/10/12/some-notes-on-lambda-web-functions.html
 [main-post-concurrency]: /blog/2026/10/12/some-notes-on-lambda-web-functions.html#behaviour
+[go-post]: /blog/2026/10/12/go-on-lambda-web-functions-via-execve.html
