@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Tech-blog styling on top of Material for MkDocs.
+   Philosophy: black/white base, one cloud-blue accent, comfortable reading.
+   ========================================================================== */
+
+/* --- Accent: one colour, everything else stays monochrome ----------------- */
+:root {
+  --awsteele-accent:       #1565a6;  /* cloud blue, from the site's artwork */
+  --awsteele-accent-hover: #0d4d80;
+}
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: var(--awsteele-accent);
+  --md-accent-fg-color: var(--awsteele-accent-hover);
+}
+[data-md-color-scheme="slate"] {
+  /* A deep, neutral near-black instead of Material's bluish "docs" slate. */
+  --md-default-bg-color:            #111317;
+  --md-default-bg-color--light:     #16181d;
+  --md-default-bg-color--lighter:   #1c1f25;
+  --md-default-bg-color--lightest:  #23262d;
+  /* Soft off-white body text — easier on the eyes than hard white. */
+  --md-default-fg-color:            #c7cbd2;
+  --md-default-fg-color--light:     #90949d;
+  --md-default-fg-color--lighter:   rgba(199, 203, 210, 0.30);
+  --md-default-fg-color--lightest:  rgba(199, 203, 210, 0.10);
+  /* Slightly elevated, low-contrast code surface. */
+  --md-code-bg-color:               #1a1d23;
+  --md-code-fg-color:               #ced2da;
+  --md-typeset-a-color:             #74b7f0;
+  --md-accent-fg-color:             #9acbf0;
+}
+/* Dark-mode chrome: header/footer sit a touch deeper than the page for a
+   calm, layered feel rather than a flat documentation panel. */
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-footer {
+  background-color: #0c0e11;
+}
+/* Headings brighten just enough to lead the eye, without harsh pure white. */
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  color: #eceef2;
+}
+/* In light mode, headings are pure black rather than Material's muted grey. */
+[data-md-color-scheme="default"] .md-typeset h1,
+[data-md-color-scheme="default"] .md-typeset h2,
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #000;
+}
+
+/* --- Stay fluid: never force horizontal overflow -------------------------- */
+/* Let flex containers shrink below their content so children wrap/scroll
+   instead of widening the page. */
+.md-main__inner,
+.md-content,
+.md-content__inner,
+.md-post,
+.md-post__content {
+  min-width: 0;
+}
+/* The byline is a flex row — let it wrap rather than push the page wide. */
+.md-post__meta .md-meta__list {
+  flex-wrap: wrap;
+}
+/* Long words, URLs and titles break instead of overflowing. */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset p,
+.md-typeset li,
+.md-post__content h2 {
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.md-typeset img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Reading comfort ------------------------------------------------------ */
+.md-typeset {
+  line-height: 1.75;
+}
+/* Hide the table-of-contents sidebar whenever it has no entries (e.g. the blog
+   index) — an empty rail just reserves space and unbalances the layout,
+   especially on tablet-width screens. */
+.md-sidebar--secondary:not(:has(.md-nav__link)) {
+  display: none;
+}
+/* Constrain the prose to a readable measure and centre it — only on wider
+   screens, so Material keeps its own side gutters on mobile. The !important
+   overrides Material's higher-specificity sidebar-adjacent margin rules. */
+@media screen and (min-width: 50em) {
+  .md-content > .md-content__inner {
+    width: calc(100% - 1.6rem);
+    max-width: 46rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+/* Slightly more air between paragraphs. */
+.md-typeset p {
+  margin: 0 0 1.1em;
+}
+
+/* --- Headings: quiet, with a structural rule under sections --------------- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.md-typeset h1 {
+  letter-spacing: -0.025em;
+}
+.md-typeset h2 {
+  margin-top: 2.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* --- Links: blue with a comfortable underline ----------------------------- */
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  text-decoration-color: var(--md-default-fg-color--lighter);
+  transition: color 0.1s, text-decoration-color 0.1s;
+}
+.md-typeset a:hover {
+  text-decoration-color: currentcolor;
+}
+
+/* Headings & blog-post titles are links, but should read as titles — ink
+   colour, no underline, with a quiet accent shift on hover. */
+.md-typeset h1 a,
+.md-typeset h2 a,
+.md-typeset h3 a,
+.md-typeset a.toclink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.12s;
+}
+.md-typeset h1 a:hover,
+.md-typeset h2 a:hover,
+.md-typeset h3 a:hover,
+.md-typeset a.toclink:hover {
+  color: var(--md-typeset-a-color);
+  text-decoration: none;
+}
+
+/* --- Left sidebar: quiet, refined ---------------------------------------- */
+/* Drop the site title repeated at the top of the nav (it's already the header). */
+.md-sidebar--primary .md-nav--primary > .md-nav__title {
+  display: none;
+}
+/* Section labels become small, lettered eyebrows rather than bold headings. */
+.md-nav--primary .md-nav__item--section > .md-nav__link {
+  margin-top: 1.1em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--md-default-fg-color--light);
+}
+/* Links sit quiet by default, warm to the accent on hover / when active. */
+.md-nav--primary .md-nav__link {
+  color: var(--md-default-fg-color--light);
+}
+.md-nav--primary .md-nav__link:hover {
+  color: var(--md-typeset-a-color);
+}
+.md-nav--primary .md-nav__link--active,
+.md-nav--primary .md-nav__link--active:focus,
+.md-nav--primary .md-nav__link--active:hover {
+  color: var(--md-typeset-a-color);
+  font-weight: 600;
+}
+
+/* --- Blog index: an editorial, curated list ------------------------------ */
+/* Drop the oversized "Blog" page title — the list of posts speaks for itself.
+   Scoped to the index via #blog so post/category titles are untouched. */
+.md-content__inner > header:has(> h1#blog) {
+  display: none;
+}
+.md-content__inner:has(> .md-post) {
+  padding-top: 0.4rem;
+}
+/* Byline-style meta: small, lettered, muted. */
+.md-post__meta .md-meta__list {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+}
+.md-post__meta .md-meta__link {
+  color: var(--md-default-fg-color--light);
+}
+.md-post__meta .md-meta__link:hover {
+  color: var(--md-typeset-a-color);
+}
+/* Post titles in the list read as titles, not document sections: no rule,
+   tighter, a touch larger, sitting close under the byline. */
+.md-post__content h2 {
+  margin-top: 0.35em;
+  margin-bottom: 0.5em;
+  padding-bottom: 0;
+  border-bottom: none;
+  font-size: 1.5em;
+  letter-spacing: -0.02em;
+}
+/* Separate posts with a single hairline and generous breathing room. */
+.md-post--excerpt {
+  padding-bottom: 2.6rem;
+  margin-bottom: 2.6rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.md-post--excerpt:last-of-type {
+  border-bottom: none;
+}
+
+/* --- Small premium details ------------------------------------------------ */
+/* Selection picks up the accent rather than the OS default. */
+::selection {
+  background-color: rgba(21, 101, 166, 0.20);
+}
+[data-md-color-scheme="slate"] ::selection {
+  background-color: rgba(111, 180, 232, 0.28);
+}
+/* Hairline rules, consistent with the rest of the chrome. */
+.md-typeset hr {
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  margin: 2.6em 0;
+}
+/* Calmer keyboard focus ring in the accent colour. */
+.md-typeset a:focus-visible,
+.md-nav__link:focus-visible {
+  outline: 2px solid var(--md-typeset-a-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Code: calmer blocks, tidy inline ------------------------------------- */
+.md-typeset code {
+  border-radius: 4px;
+  padding: 0.12em 0.36em;
+  font-size: 0.86em;
+}
+.md-typeset pre > code {
+  padding: 0.9em 1.05em;
+}
+.md-typeset pre {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+}
+.md-typeset pre > code {
+  border: none;
+}
+
+/* --- Admonitions / callouts: even breathing room top and bottom ----------- */
+/* Material gives the body's last child a .6rem bottom margin, but the custom
+   paragraph rule above strips top margins — so the first line hugs the title
+   bar while the last floats above the lower border. Mirror the spacing so the
+   content sits evenly inset. */
+.md-typeset .admonition-title + *,
+.md-typeset summary + * {
+  margin-top: 0.6rem;
+}
+
+/* --- Quieter chrome ------------------------------------------------------- */
+/* Zen header: the title reads as a calm wordmark, not a bold banner. */
+.md-header__title,
+.md-header__topic > .md-ellipsis {
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+/* The site title links home, but reads as a wordmark — inherit the header ink,
+   no underline, just a subtle hover cue. */
+.md-header__title-link {
+  color: inherit;
+}
+.md-header__title-link:hover,
+.md-header__title-link:focus {
+  color: inherit;
+  opacity: 0.7;
+}
+
+/* Flatten the header into a thin-ruled band rather than a heavy bar. */
+.md-header {
+  box-shadow: none;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.md-header--shadow {
+  box-shadow: none;
+}
+
+/* Keep the per-post edit/view actions out of the way (was the only prior rule). */
+.md-post__action {
+  display: none !important;
+}
