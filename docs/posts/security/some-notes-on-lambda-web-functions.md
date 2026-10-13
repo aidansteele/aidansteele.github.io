@@ -275,6 +275,9 @@ being rejected with `429 Platform.EndpointMaxEnvThrottle`**. The next identical
 burst had 10 rejected. The one after that had none, with ~10-14 per environment.
 After a few more bursts it was comfortably doing 40 per environment. I may have
 done something wrong here; scaling is normally the thing Lambda is good at.
+**UPDATE**: If you leave the max environments unconfigured, there are no such
+`429` errors. The platform instead overprovisions when it detects a burst of traffic.
+I think this is how I will leave it in the future.
 
 **You get one second after `SIGTERM`.** [The docs say so](https://docs.aws.amazon.com/lambda/latest/dg/web-functions-env-lifecycle.html) too. My
 handler logged "still alive 500ms after SIGTERM" but not the 1500ms message, and

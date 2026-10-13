@@ -92,17 +92,15 @@ The event functions each spun up ~160 environments, hit 164
 concurrent executions and kept pace with my `send-message-batch` loop,
 finishing in 31 seconds. 
 
-The Web Function was pinned to `maxEnvironments: 4`
-by me, so it took 90 seconds, ran 4 environments at up to 14 concurrent
-requests each, and shed 92 requests with `429 Platform.EndpointMaxEnvThrottle`
-in the first 30 seconds while the per-environment limit bounced around. 
-The Pipe retried some of those itself and sent 52 back to SQS, where they
-sat out the queue's 60-second visibility timeout before being redelivered.
-Nothing reached the DLQ. 
-
-I don't know why the per-environment limit does that; it's the same thing I
-saw [in the first post][main-post-concurrency]. Don't set `maxEnvironments`
-as low as I did.
+The Web Function, with no `ScalingConfig` at all, kept up: it served all 2000
+requests in 35 seconds across ten environments each at 14-15 concurrent requests
+with no issues. However, when I set `maxEnvironments: 4` it returned 92 `429`
+errors and the EventBridge Pipe had to retry those messages. The requests were
+shed with `429 Platform.EndpointMaxEnvThrottle` while the per-environment limit 
+[dynamically adjusts its concurrency][main-post-concurrency].
+I guess the platform decides to err on the side of over-provisioning when there's
+a sudden burst of traffic _only if_ there's no max environment count set. I think
+for my purposes I will rarely set a limit.
 
 ## Costs
 
