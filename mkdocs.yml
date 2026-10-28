@@ -103,6 +103,20 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 extra:
+  # Rendered as cards at the bottom of the left sidebar (overrides/partials/nav.html).
+  projects:
+    - name: Unofax
+      url: https://unofax.com
+      blurb: Send a fax online
+      logo: assets/projects/unofax.svg
+    - name: Unopost
+      url: https://unopost.com.au
+      blurb: Post a letter online
+      logo: assets/projects/unopost.svg
+    - name: Snailgram
+      url: https://snailgram.com.au
+      blurb: Send pen-written cards
+      logo: assets/projects/snailgram.svg
   social:
     - icon: fontawesome/brands/github 
       link: https://github.com/aidansteele

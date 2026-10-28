@@ -178,6 +178,92 @@
   font-weight: 600;
 }
 
+/* --- Sidebar: "Things I've built" cards ---------------------------------- */
+/* Sits below the generated nav, set apart by a hairline. The heading reuses
+   the section-eyebrow treatment above so it reads as part of the same rail. */
+.awsteele-projects {
+  margin: 1.6rem 0.6rem 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+.awsteele-projects__title {
+  margin: 0 0 0.6rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--md-default-fg-color--light);
+}
+.awsteele-projects__list {
+  /* Pull the cards out by their padding so icons line up with the nav text. */
+  margin: 0 -0.6rem;
+  padding: 0;
+  list-style: none;
+}
+.awsteele-projects__list li + li {
+  margin-top: 0.15rem;
+}
+.awsteele-project {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  color: var(--md-default-fg-color);
+  transition: background-color 0.12s, color 0.12s;
+}
+.awsteele-project:hover,
+.awsteele-project:focus-visible {
+  background-color: var(--md-default-fg-color--lightest);
+  color: var(--md-typeset-a-color);
+}
+.awsteele-project:focus-visible {
+  outline: 2px solid var(--md-typeset-a-color);
+  outline-offset: 1px;
+}
+/* Product logos are full-bleed app icons; a shared radius keeps square and
+   pre-rounded ones looking like a set. */
+.awsteele-project__logo {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 6px;
+}
+.awsteele-project__arrow svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: currentcolor;
+}
+.awsteele-project__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+.awsteele-project__name {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.awsteele-project__blurb {
+  font-size: 0.62rem;
+  color: var(--md-default-fg-color--light);
+}
+.awsteele-project__arrow {
+  display: flex;
+  flex: none;
+  color: var(--md-default-fg-color--lighter);
+  opacity: 0;
+  transform: translate(-2px, 2px);
+  transition: opacity 0.12s, transform 0.12s;
+}
+.awsteele-project:hover .awsteele-project__arrow,
+.awsteele-project:focus-visible .awsteele-project__arrow {
+  opacity: 1;
+  transform: none;
+  color: var(--md-typeset-a-color);
+}
+
 /* --- Blog index: an editorial, curated list ------------------------------ */
 /* Drop the oversized "Blog" page title — the list of posts speaks for itself.
    Scoped to the index via #blog so post/category titles are untouched. */
