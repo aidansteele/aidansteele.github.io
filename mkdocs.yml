@@ -103,7 +103,7 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 extra:
-  # Rendered as cards at the bottom of the left sidebar (overrides/partials/nav.html).
+  # Rendered as the last section of the left sidebar nav (overrides/partials/nav.html).
   projects:
     - name: Unofax
       url: https://unofax.com

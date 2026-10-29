@@ -1,7 +1,7 @@
 {#-
-  Overrides the Material nav partial to append a "Things I've built" block
-  (from config.extra.projects) below the generated navigation. Everything
-  above the closing </ul> matches the stock template.
+  Overrides the Material nav partial to append a "Things I've built" section
+  (from config.extra.projects) after the generated navigation. Everything
+  else matches the stock template.
 -#}
 {% import "partials/nav-item.html" as item with context %}
 {% set class = "md-nav md-nav--primary" %}
@@ -28,26 +28,38 @@
       {% set path = "__nav_" ~ loop.index %}
       {{ item.render(nav_item, path, 1) }}
     {% endfor %}
+    {#- "Things I've built" mirrors a generated section's markup so it inherits
+        the same eyebrow, spacing and link styles as Archive / Categories. -#}
+    {% if config.extra.projects %}
+      {% set path = "__nav_projects" %}
+      <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+        <input class="md-nav__toggle md-toggle" type="checkbox" id="{{ path }}">
+        <label class="md-nav__link" for="{{ path }}" id="{{ path }}_label" tabindex="">
+          <span class="md-ellipsis">Things I've built</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+        <nav class="md-nav" data-md-level="1" aria-labelledby="{{ path }}_label" aria-expanded="false">
+          <label class="md-nav__title" for="{{ path }}">
+            <span class="md-nav__icon md-icon"></span>
+            Things I've built
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            {% for project in config.extra.projects %}
+              <li class="md-nav__item">
+                <a href="{{ project.url }}" class="md-nav__link awsteele-project" target="_blank" rel="noopener">
+                  {% if project.logo %}
+                    <img class="awsteele-project__logo" src="{{ project.logo | url }}" alt="" width="20" height="20" loading="lazy">
+                  {% endif %}
+                  <span class="awsteele-project__text">
+                    <span class="md-ellipsis">{{ project.name }}</span>
+                    <span class="awsteele-project__blurb md-ellipsis">{{ project.blurb }}</span>
+                  </span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </li>
+    {% endif %}
   </ul>
-  {% if config.extra.projects %}
-    <div class="awsteele-projects">
-      <div class="awsteele-projects__title">Things I've built</div>
-      <ul class="awsteele-projects__list">
-        {% for project in config.extra.projects %}
-          <li>
-            <a href="{{ project.url }}" class="awsteele-project" target="_blank" rel="noopener">
-              {% if project.logo %}
-                <img class="awsteele-project__logo" src="{{ project.logo | url }}" alt="" width="32" height="32" loading="lazy">
-              {% endif %}
-              <span class="awsteele-project__text">
-                <span class="awsteele-project__name">{{ project.name }}</span>
-                <span class="awsteele-project__blurb">{{ project.blurb }}</span>
-              </span>
-              <span class="awsteele-project__arrow">{% include ".icons/material/arrow-top-right.svg" %}</span>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
 </nav>
