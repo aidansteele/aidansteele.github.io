@@ -26,3 +26,23 @@ jobs:
         env:
           CI: true
         run: mkdocs gh-deploy --force
+      - name: Submit URLs to IndexNow
+        env:
+          INDEXNOW_KEY: 6037dd568442192b9a9abe3cc6af0e74
+          SITE_HOST: awsteele.com
+        run: |
+          # Wait for GitHub Pages to publish the new build (key file must be reachable for verification).
+          for i in $(seq 1 30); do
+            if [ "$(curl -fsS "https://$SITE_HOST/$INDEXNOW_KEY.txt" || true)" = "$INDEXNOW_KEY" ]; then break; fi
+            echo "waiting for key file to be live ($i)..."; sleep 10
+          done
+
+          urls=$(grep -o '<loc>[^<]*</loc>' site/sitemap.xml | sed -e 's/<loc>//' -e 's/<\/loc>//' | jq -R . | jq -s .)
+          jq -n --arg host "$SITE_HOST" --arg key "$INDEXNOW_KEY" --argjson urls "$urls" \
+            '{host: $host, key: $key, keyLocation: "https://\($host)/\($key).txt", urlList: $urls}' > indexnow.json
+          echo "Submitting $(jq '.urlList | length' indexnow.json) URLs"
+
+          status=$(curl -sS -o /dev/stderr -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @indexnow.json)
+          echo "IndexNow responded HTTP $status"
+          case "$status" in 200|202) ;; *) exit 1 ;; esac
