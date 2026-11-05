@@ -29,7 +29,8 @@ Sending faxes was a nice first taste, but it's still more or less entirely
 digital. Sending post meant having to buy a laser printer, buy a whole lot of
 prepaid envelopes, printing things out, getting them to the mailbox on time each day,
 etc. It's actually quite therapeutic and gives us an opportunity to leave the
-house.
+house. It's likely a business that I will hand over to my retired (and restless)
+parents so they can still be useful and earn some money.
 
 Of course we went overboard and built a wildly over-engineered admin panel, but
 what does "over-engineering" even mean nowadays? It cost us some tokens, and it
