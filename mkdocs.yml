@@ -139,6 +139,9 @@ plugins:
       feeds_filenames:
         json_created: feed.json
         rss_created: feed.xml
+      # Don't reference an XSLT stylesheet: browsers are removing XSLT support
+      # and warn about it when the feed is viewed directly.
+      stylesheet: ""
       match_path: posts/security/.*
       date_from_meta:
         as_creation: date.created
